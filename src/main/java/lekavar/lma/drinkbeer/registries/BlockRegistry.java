@@ -2,7 +2,7 @@ package lekavar.lma.drinkbeer.registries;
 
 import lekavar.lma.drinkbeer.blocks.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

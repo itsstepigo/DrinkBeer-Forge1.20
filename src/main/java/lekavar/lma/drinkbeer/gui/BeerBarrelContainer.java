@@ -33,7 +33,7 @@ public class BeerBarrelContainer extends AbstractContainerMenu {
         this.syncData = syncData;
 
         // Layout Slot
-        // Plauer Inventory
+        // Player Inventory
         layoutPlayerInventorySlots(8, 84, new InvWrapper(playerInventory));
         // Input Ingredients
         addSlot(new Slot(brewingSpace, 0, 28, 26));

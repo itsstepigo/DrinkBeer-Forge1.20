@@ -13,7 +13,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -22,14 +21,14 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MilkBucketItem;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BeerBarrelBlockEntity extends BlockEntity implements MenuProvider, IBrewingInventory {
+public class BeerBarrelBlockEntity extends BaseContainerBlockEntity implements IBrewingInventory {
     private NonNullList<ItemStack> items = NonNullList.withSize(6, ItemStack.EMPTY);
     // This int will not only indicate remainingBrewTime, but also represent Standard Brewing Time if valid in "waiting for ingredients" stage
     private int remainingBrewTime;
@@ -190,12 +189,10 @@ public class BeerBarrelBlockEntity extends BlockEntity implements MenuProvider, 
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
+    public void saveAdditional(CompoundTag tag) {
         ContainerHelper.saveAllItems(tag, this.items);
         tag.putShort("RemainingBrewTime", (short) this.remainingBrewTime);
         tag.putShort("statusCode", (short) this.statusCode);
-        super.save(tag);
-        return tag;
     }
 
     @Override
@@ -212,10 +209,20 @@ public class BeerBarrelBlockEntity extends BlockEntity implements MenuProvider, 
         return new TranslatableComponent("block.drinkbeer.beer_barrel");
     }
 
+    @Override
+    protected Component getDefaultName() {
+        return new TranslatableComponent("block.drinkbeer.beer_barrel");
+    }
+
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
         return new BeerBarrelContainer(id, this, syncData, inventory, this);
+    }
+
+    @Override
+    protected AbstractContainerMenu createMenu(int p_58627_, Inventory p_58628_) {
+        return null;
     }
 
     @Override
@@ -226,7 +233,7 @@ public class BeerBarrelBlockEntity extends BlockEntity implements MenuProvider, 
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return new ClientboundBlockEntityDataPacket(worldPosition, 1, getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
