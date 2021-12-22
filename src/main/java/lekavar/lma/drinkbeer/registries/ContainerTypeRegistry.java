@@ -1,5 +1,7 @@
 package lekavar.lma.drinkbeer.registries;
 
+import lekavar.lma.drinkbeer.gui.BartendingTableContainer;
+import lekavar.lma.drinkbeer.gui.BartendingTableContainerScreen;
 import lekavar.lma.drinkbeer.gui.BeerBarrelContainer;
 import lekavar.lma.drinkbeer.gui.BeerBarrelContainerScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -18,11 +20,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ContainerTypeRegistry {
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, "drinkbeer");
     public static final RegistryObject<MenuType<BeerBarrelContainer>> beerBarrelContainer = CONTAINERS.register("beer_barrel_container", () -> IForgeMenuType .create(BeerBarrelContainer::new));
+    public static final RegistryObject<MenuType<BartendingTableContainer>> bartendingTableContainer = CONTAINERS.register("beer_barrel_container", () -> IForgeMenuType .create(BartendingTableContainer::new));
 
     @SubscribeEvent
     public static void registerContainerScreen(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             MenuScreens.register(ContainerTypeRegistry.beerBarrelContainer.get(), BeerBarrelContainerScreen::new);
+            MenuScreens.register(ContainerTypeRegistry.bartendingTableContainer.get(), BartendingTableContainerScreen::new);
         });
     }
 }
