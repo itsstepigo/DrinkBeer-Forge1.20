@@ -1,13 +1,15 @@
 package lekavar.lma.drinkbeer.registries;
 
+import lekavar.lma.drinkbeer.DrinkBeer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class SoundEventRegistry {
-    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, "drinkbeer");
+    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, DrinkBeer.MOD_ID);
     public static final RegistryObject<SoundEvent> DRINKING_BEER = register("drinking_beer");
     public static final RegistryObject<SoundEvent> POURING = register("pouring");
     public static final RegistryObject<SoundEvent> POURING_CHRISTMAS = register("pouring_christmas");

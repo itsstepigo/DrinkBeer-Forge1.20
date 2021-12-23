@@ -11,14 +11,17 @@ public class DrinkBeer {
     // Directly reference a log4j logger.
     // private static final Logger LOGGER = LogManager.getLogger();
 
+    public static final String MOD_ID = "drinkbeer";
+
     public DrinkBeer() {
+        MobEffectRegistry.STATUS_EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ItemRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BlockRegistry.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BlockEntityRegistry.BLOKC_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         SoundEventRegistry.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MobEffectRegistry.STATUS_EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ContainerTypeRegistry.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         RecipeRegistry.RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ParticleRegistry.PARTICLES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         // We just don't need these part now
         // Register the setup method for modloading

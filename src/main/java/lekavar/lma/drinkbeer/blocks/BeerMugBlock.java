@@ -30,8 +30,8 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import javax.annotation.Nullable;
 
 public class BeerMugBlock extends Block {
-    public static final IntegerProperty AMOUNT = IntegerProperty.create("amount", 1, 3);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final IntegerProperty AMOUNT = IntegerProperty.create("amount", 1, 3);
 
     protected static final VoxelShape[] SHAPE_BY_AMOUNT = new VoxelShape[]{
             Block.box(0, 0, 0, 16, 16, 16),
@@ -42,7 +42,9 @@ public class BeerMugBlock extends Block {
 
     public BeerMugBlock() {
         super(Properties.of(Material.WOOD).strength(1.0f).noOcclusion());
-        this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1));
+        this.registerDefaultState(
+                this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1)
+        );
     }
 
     @Override
@@ -71,9 +73,9 @@ public class BeerMugBlock extends Block {
         ItemStack itemStack = player.getItemInHand(hand);
         // Placing Beer
         if (itemStack.getItem().asItem() == state.getBlock().asItem()) {
-            if (world.isClientSide()) {
+            if ( world != null && world.isClientSide()) {
                 return InteractionResult.SUCCESS;
-            } else {
+            } else if (world != null){
                 int amount = state.getValue(AMOUNT);
                 int mugInHandCount = player.getItemInHand(hand).getCount();
                 boolean isCreative = player.isCreative();
@@ -99,6 +101,10 @@ public class BeerMugBlock extends Block {
                         return InteractionResult.FAIL;
                     }
                 }
+            }
+            else
+            {
+                return InteractionResult.FAIL;
             }
         }
         // Retrieve Beer

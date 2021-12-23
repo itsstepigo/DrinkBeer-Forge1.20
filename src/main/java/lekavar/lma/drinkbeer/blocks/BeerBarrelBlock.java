@@ -85,7 +85,7 @@ public class BeerBarrelBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntity) {
-        if (level.isClientSide()) {
+        if (level != null && level.isClientSide()) {
             return null;
         } else {
             return (theLevel, pos, state, tile) -> {

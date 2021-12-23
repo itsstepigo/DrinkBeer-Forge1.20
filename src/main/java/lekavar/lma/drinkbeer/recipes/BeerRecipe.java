@@ -1,4 +1,4 @@
-package lekavar.lma.drinkbeer.recipes;
+/*package lekavar.lma.drinkbeer.recipes;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -77,3 +77,6 @@ public class BeerRecipe {
         return newBeerRecipe;
     }
 }
+
+
+ */

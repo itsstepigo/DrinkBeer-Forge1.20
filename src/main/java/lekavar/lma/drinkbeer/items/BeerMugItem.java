@@ -37,10 +37,23 @@ import java.util.stream.Collectors;
 
 public class BeerMugItem extends BeerBlockItem {
     private final static double MAX_PLACE_DISTANCE = 2.0D;
-    private final static int BASE_NIGHT_VISION_TIME = 2400;
     private final boolean hasExtraTooltip;
 
+    public BeerMugItem(Block block, int nutrition, boolean hasExtraTooltip) {
+        super(block,new Item.Properties().tab(ModCreativeTab.BEER).stacksTo(16)
+                .food(new FoodProperties.Builder().nutrition(nutrition).alwaysEat().build()));
+        this.hasExtraTooltip = hasExtraTooltip;
+    }
+
     public BeerMugItem(Block block, @Nullable MobEffectInstance statusEffectInstance, int nutrition, boolean hasExtraTooltip) {
+        super(block,new Item.Properties().tab(ModCreativeTab.BEER).stacksTo(16)
+                .food(statusEffectInstance != null
+                        ? new FoodProperties.Builder().nutrition(nutrition).effect(statusEffectInstance, 1).alwaysEat().build()
+                        : new FoodProperties.Builder().nutrition(nutrition).alwaysEat().build()));
+        this.hasExtraTooltip = hasExtraTooltip;
+    }
+
+    public BeerMugItem(Block block, Supplier<MobEffectInstance> statusEffectInstance, int nutrition, boolean hasExtraTooltip) {
         super(block,new Item.Properties().tab(ModCreativeTab.BEER).stacksTo(16)
                 .food(statusEffectInstance != null
                         ? new FoodProperties.Builder().nutrition(nutrition).effect(statusEffectInstance, 1).alwaysEat().build()
@@ -60,7 +73,7 @@ public class BeerMugItem extends BeerBlockItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
         String name = this.asItem().toString();
-        if (hasEffectNoticeTooltip() && world.isClientSide()) {
+        if (hasEffectNoticeTooltip() && world != null && world.isClientSide()) {
             tooltip.add(new TranslatableComponent("item.drinkbeer." + name + ".tooltip").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
         }
         String hunger = String.valueOf(stack.getItem().getFoodProperties().getNutrition());

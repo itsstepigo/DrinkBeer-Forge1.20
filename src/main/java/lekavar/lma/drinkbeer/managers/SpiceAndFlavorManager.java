@@ -52,7 +52,7 @@ public class SpiceAndFlavorManager {
                 return Spices.byId(lastSpiceId).getFlavor().getParticle();
             }
         }
-        return Flavors.DEFAULT_PARTICLE;
+        return (SimpleParticleType) Flavors.DEFAULT_PARTICLE;
     }
 
     private static List<Flavors> spiceListToFlavorList(@NotNull List<Integer> spiceList) {
@@ -118,7 +118,7 @@ public class SpiceAndFlavorManager {
             for (Flavors flavor : mixedBeerOnUsing.getFlavorList()) {
                 switch (flavor) {
                     case SPICY, FIERY -> applySpicyFlavorValue(mixedBeerOnUsing, flavor);
-                    case AROMITIC, AROMITIC1 -> applyAromiticFlavorValue(mixedBeerOnUsing, flavor);
+                    case AROMATIC, AROMATIC1 -> applyAromiticFlavorValue(mixedBeerOnUsing, flavor);
                     case REFRESHING, REFRESHING1 -> applyRefreshingFlavorValue(mixedBeerOnUsing, flavor);
                     case NUTTY -> applyNuttyFlavorAction(mixedBeerOnUsing, flavor);
                     case SWEET -> applySweetFlavorAction(mixedBeerOnUsing, flavor);
@@ -180,8 +180,8 @@ public class SpiceAndFlavorManager {
 
     public static void applyAromiticFlavorValue(MixedBeerOnUsing mixedBeerOnUsing, Flavors flavor) {
         switch (flavor) {
-            case AROMITIC -> mixedBeerOnUsing.addAllStatusEffectDuration(800);
-            case AROMITIC1 -> mixedBeerOnUsing.addAllStatusEffectDuration(1200);
+            case AROMATIC -> mixedBeerOnUsing.addAllStatusEffectDuration(800);
+            case AROMATIC1 -> mixedBeerOnUsing.addAllStatusEffectDuration(1200);
         }
     }
 

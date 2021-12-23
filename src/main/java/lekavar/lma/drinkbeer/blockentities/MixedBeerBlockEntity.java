@@ -1,3 +1,4 @@
+/*
 package lekavar.lma.drinkbeer.blockentities;
 
 import lekavar.lma.drinkbeer.DrinkBeer;
@@ -75,3 +76,4 @@ public class MixedBeerBlockEntity extends BlockEntity {
     }
 
 }
+*/

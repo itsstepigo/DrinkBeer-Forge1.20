@@ -9,6 +9,7 @@ import lekavar.lma.drinkbeer.utils.beer.Beers;
 import lekavar.lma.drinkbeer.utils.mixedbeer.Flavors;
 import lekavar.lma.drinkbeer.utils.mixedbeer.MixedBeerOnUsing;
 import lekavar.lma.drinkbeer.utils.mixedbeer.Spices;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -38,36 +39,14 @@ public class MixedBeerManager {
         ItemStack resultStack = new ItemStack(ItemRegistry.MIXED_BEER.get(), 1);
 
         spiceList = removeIllegalSpiceId(spiceList);
+        CompoundTag tags = resultStack.getOrCreateTagElement("BlockEntityTag");
+        CompoundTag tag = new CompoundTag();
+        tags.put("MixedBeer", tag);
+        tag.putInt("beerId", beerId);
+        tag.putIntArray("spiceList", spiceList);
+        resultStack.setTag(tag);
 
-        /* TODO load data
-        NbtCompound compoundTag = resultStack.getOrCreateSubNbt("BlockEntityTag");
-        NbtCompound tag = new NbtCompound();
-        compoundTag.put("MixedBeer", tag);
-        tag.putInt("BeerId", beerId);
-
-        NbtList listTag = genSpiceListTag(spiceList);
-        if (listTag != null) {
-            tag.put("Spices", listTag);
-        }
-
-        resultStack.writeNbt(tag);
-
-         */
         return resultStack;
-    }
-
-    // TODO
-    public static NbtList genSpiceListTag(List<Integer> spiceList) {
-        NbtList listTag = null;
-        if (!spiceList.isEmpty()) {
-            listTag = new NbtList();
-            for (int i = 0; i < MixedBeerManager.MAX_SPICES_COUNT && i < spiceList.size(); i++) {
-                NbtCompound tag2 = new NbtCompound();
-                tag2.putInt("SpiceId", spiceList.get(i));
-                listTag.add(tag2);
-            }
-        }
-        return listTag;
     }
 
     private static List<Integer> removeIllegalSpiceId(List<Integer> spiceList) {
@@ -76,31 +55,23 @@ public class MixedBeerManager {
                 .collect(Collectors.toList());
     }
 
-    // TODO
     public static int getBeerId(ItemStack itemStack) {
         int beerId = Beers.EMPTY_BEER_ID;
         if (itemStack.getItem() instanceof MixedBeerBlockItem) {
-            NbtCompound compoundTag = itemStack.getSubNbt("BlockEntityTag");
-            if (compoundTag != null && compoundTag.contains("MixedBeer")) {
-                NbtCompound tag = compoundTag.getCompound("MixedBeer");
-                beerId = tag.getInt("BeerId");
+            CompoundTag tags = itemStack.getTagElement("BlockEntityTag");
+            if (tags != null && tags.contains("MixedBeer")) {
+                beerId = tags.getCompound("MixedBeer").getInt("beerId");
             }
         }
-
         return beerId;
     }
 
-    // TODO
     public static List<Integer> getSpiceList(ItemStack itemStack) {
         List<Integer> spiceList = new ArrayList<>();
-        NbtCompound compoundTag = itemStack.getSubNbt("BlockEntityTag");
-        if (compoundTag != null && compoundTag.contains("MixedBeer")) {
-            NbtCompound tag = compoundTag.getCompound("MixedBeer");
-            NbtList listTag = tag.getList("Spices", 10);
-            for (int i = 0; i < listTag.size() && i < MixedBeerManager.MAX_SPICES_COUNT; ++i) {
-                NbtCompound tag2 = listTag.getCompound(i);
-                int spiceId = tag2.getInt("SpiceId");
-                spiceList.add(spiceId);
+        CompoundTag tags = itemStack.getTagElement("BlockEntityTag");
+        if (tags != null && tags.contains("MixedBeer")) {
+            for (int spice:tags.getCompound("MixedBeer").getIntArray("spiceList")) {
+                spiceList.add(spice);
             }
         }
         return spiceList;

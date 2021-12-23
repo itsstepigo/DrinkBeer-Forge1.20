@@ -19,14 +19,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class MixedBeerBlockItem extends BeerBlockItem {
-    public MixedBeerBlockItem() {
-        super(BlockRegistry.MIXED_BEER.get(), new Item.Properties().tab(ModCreativeTab.BEER).stacksTo(1)
+    public MixedBeerBlockItem(Block block) {
+        super(block, new Item.Properties().tab(ModCreativeTab.BEER).stacksTo(1)
                 .food(new FoodProperties.Builder().alwaysEat().build()));
     }
 
@@ -95,7 +96,7 @@ public class MixedBeerBlockItem extends BeerBlockItem {
 
 
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag context) {
-        if(world.isClientSide()) {
+        if(world != null && world.isClientSide()) {
             appendMixedBeerTooltip(stack, tooltip);
         }
     }

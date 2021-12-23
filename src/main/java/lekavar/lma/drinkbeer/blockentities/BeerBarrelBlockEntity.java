@@ -137,7 +137,7 @@ public class BeerBarrelBlockEntity extends BaseContainerBlockEntity implements I
     }
 
     private void startBrewing(BrewingRecipe recipe) {
-        // Pre-set bear to output Slot
+        // Pre-set beer to output Slot
         // This Step must be done first
         items.set(5, recipe.assemble(this));
         // Consume Ingredient & Cup;

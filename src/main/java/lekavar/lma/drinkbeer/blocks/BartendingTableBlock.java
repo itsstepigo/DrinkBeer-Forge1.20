@@ -79,6 +79,7 @@ public class BartendingTableBlock extends BaseEntityBlock {
                 world.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1f, 1f);
                 BlockEntity blockentity = world.getBlockEntity(pos);
                 if (blockentity instanceof BartendingTableBlockEntity) {
+                    ((BartendingTableBlockEntity) blockentity).setBeer(itemStack);
                     itemStack.shrink(1);
                     NetworkHooks.openGui((ServerPlayer) player, (BartendingTableBlockEntity) blockentity, (FriendlyByteBuf packerBuffer) -> {
                         packerBuffer.writeBlockPos(blockentity.getBlockPos());
@@ -88,11 +89,25 @@ public class BartendingTableBlock extends BaseEntityBlock {
             } else {
                 boolean currentOpenedState = state.getValue(OPENED);
                 world.playSound(null, pos, currentOpenedState ? SoundEventRegistry.BARTENDING_TABLE_CLOSE.get() : SoundEventRegistry.BARTENDING_TABLE_OPEN.get(), SoundSource.BLOCKS, 1f, 1f);
-                world.setBlockAndUpdate(pos, state.getBlock().defaultBlockState().setValue(OPENED, !currentOpenedState));
+                world.setBlockAndUpdate(pos, state.setValue(OPENED, !currentOpenedState));
                 return InteractionResult.CONSUME;
             }
         }
         return InteractionResult.sidedSuccess(world.isClientSide);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntity) {
+        if (level != null && level.isClientSide()) {
+            return null;
+        } else {
+            return (theLevel, pos, state, tile) -> {
+                if (tile instanceof BartendingTableBlockEntity bartendingTableBlockEntity) {
+                    bartendingTableBlockEntity.tickServer();
+                }
+            };
+        }
     }
 
 

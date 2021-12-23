@@ -1,5 +1,6 @@
 package lekavar.lma.drinkbeer.registries;
 
+import lekavar.lma.drinkbeer.DrinkBeer;
 import lekavar.lma.drinkbeer.gui.BartendingTableContainer;
 import lekavar.lma.drinkbeer.gui.BartendingTableContainerScreen;
 import lekavar.lma.drinkbeer.gui.BeerBarrelContainer;
@@ -16,11 +17,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 // Register Container & ContainerScreen in one class.
 // Automatically Registering Static Event Handlers, see https://mcforge.readthedocs.io/en/1.16.x/events/intro/#automatically-registering-static-event-handlers
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = DrinkBeer.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ContainerTypeRegistry {
-    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, "drinkbeer");
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, DrinkBeer.MOD_ID);
     public static final RegistryObject<MenuType<BeerBarrelContainer>> beerBarrelContainer = CONTAINERS.register("beer_barrel_container", () -> IForgeMenuType .create(BeerBarrelContainer::new));
-    public static final RegistryObject<MenuType<BartendingTableContainer>> bartendingTableContainer = CONTAINERS.register("beer_barrel_container", () -> IForgeMenuType .create(BartendingTableContainer::new));
+    public static final RegistryObject<MenuType<BartendingTableContainer>> bartendingTableContainer = CONTAINERS.register("bartending_table_normal_container", () -> IForgeMenuType .create(BartendingTableContainer::new));
 
     @SubscribeEvent
     public static void registerContainerScreen(FMLClientSetupEvent event) {

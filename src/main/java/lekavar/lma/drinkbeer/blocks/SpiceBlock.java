@@ -96,7 +96,9 @@ public class SpiceBlock extends HalfTransparentBlock {
             double x = (double) pos.getX() + 0.5D;
             double y = (double) pos.getY() + 0.3D + new Random().nextDouble() / 4;
             double z = (double) pos.getZ() + 0.5D;
-            world.addParticle(particle, x, y, z, 0.0D, 0.0D, 0.0D);
+            if(particle != null) {
+                world.addParticle(particle, x, y, z, 0.0D, 0.0D, 0.0D);
+            }
         }
         return InteractionResult.SUCCESS;
     }
