@@ -14,7 +14,7 @@ apply plugin: 'maven-publish'
 
 version = '2.4.0'
 group = 'lekavar.lma' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'drinkbeer-1.18.1'
+archivesBaseName = 'drinkbeer-1.18.2'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
