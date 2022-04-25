@@ -75,7 +75,7 @@ public class BeerBarrelBlockEntity extends BaseContainerBlockEntity implements I
             // ingredient slots must have no empty slot
             if (!getIngredients().contains(ItemStack.EMPTY)) {
                 // Try match Recipe
-                BrewingRecipe recipe = level.getRecipeManager().getRecipeFor(RecipeRegistry.Type.BREWING, this, this.level).orElse(null);
+                BrewingRecipe recipe = level.getRecipeManager().getRecipeFor(RecipeRegistry.RECIPE_TYPE_BREWING.get(), this, this.level).orElse(null);
                 if (canBrew(recipe)) {
                     // Show Standard Brewing Time & Result
                     showPreview(recipe);

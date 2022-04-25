@@ -115,12 +115,12 @@ public class BrewingRecipe implements Recipe<IBrewingInventory> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeRegistry.BREWING.get();
+        return RecipeRegistry.RECIPE_SERIALIZER_BREWING.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeRegistry.Type.BREWING;
+        return RecipeRegistry.RECIPE_TYPE_BREWING.get();
     }
 
     public int getRequiredCupCount() {
