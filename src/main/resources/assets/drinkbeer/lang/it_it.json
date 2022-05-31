@@ -1,0 +1,41 @@
+{
+  "itemGroup.drinkbeer.beer": "Birra",
+  "itemGroup.drinkbeer.general": "Blocchi della DrinkBeer",
+
+  "block.drinkbeer.beer_mug": "Birra del Minatore",
+  "block.drinkbeer.beer_mug_blaze_stout": "Birra Scura Incandescente",
+  "block.drinkbeer.beer_mug_blaze_milk_stout": "Birra Scura al Latte Incandescente",
+  "block.drinkbeer.beer_mug_apple_lambic": "Birra della Valle della Senna alle Mele",
+  "block.drinkbeer.beer_mug_sweet_berry_kriek": "Kriek alle Bacche Dolci",
+  "block.drinkbeer.beer_mug_haars_icey_pale_lager": "Birra Ghiacciata di Haar",
+  "block.drinkbeer.beer_mug_pumpkin_kvass": "Kvass alla Zucca",
+  "block.drinkbeer.beer_mug_frothy_pink_eggnog": "Latte di Gallina Schiumoso Rosa",
+  "block.drinkbeer.beer_mug_night_howl_kvass": "Kvass all'Ululato Notturno",
+
+  "block.drinkbeer.empty_beer_mug": "Boccale di Birra Vuoto",
+  "block.drinkbeer.beer_barrel": "Fusto",
+  "block.drinkbeer.iron_call_bell": "Campanello per Chiamata in Ferro",
+  "block.drinkbeer.golden_call_bell": "Campanello per Chiamata in Oro",
+
+  "block.drinkbeer.recipe_board_beer_mug": "Tavola della Ricetta della Birra del Minatore",
+  "block.drinkbeer.recipe_board_beer_mug_blaze_stout": "Tavola della Ricetta della Birra Scura Incandescente",
+  "block.drinkbeer.recipe_board_beer_mug_blaze_milk_stout": "Tavola della Ricetta della Birra al Latte Incandescente",
+  "block.drinkbeer.recipe_board_beer_mug_apple_lambic": "Tavola della Ricetta della Birra della Valle della Senna alle Mele",
+  "block.drinkbeer.recipe_board_beer_mug_sweet_berry_kriek": "Tavola della Ricetta della Kriek alle Bacche Dolci",
+  "block.drinkbeer.recipe_board_beer_mug_haars_icey_pale_lager": "Tavola della Ricetta della Birra Ghiacciata di Haar",
+  "block.drinkbeer.recipe_board_beer_mug_pumpkin_kvass": "Tavola della Ricetta della Kvass alla Zucca",
+  "block.drinkbeer.recipe_board_beer_mug_night_howl_kvass": "Tavola della Ricetta della Kvass all'Ululato Notturno",
+
+  "block.drinkbeer.recipe_board_package": "Pacchetto delle Ricette",
+
+  "item.drinkbeer.beer_mug.tooltip": "Rapidità 1:00",
+  "item.drinkbeer.beer_mug_blaze_stout.tooltip":"Resistenza al Fuoco 1:30",
+  "item.drinkbeer.beer_mug_blaze_milk_stout.tooltip":"Resistenza al Fuoco 2:00",
+  "item.drinkbeer.beer_mug_apple_lambic.tooltip":"Rigenerazione 0:15",
+  "item.drinkbeer.beer_mug_sweet_berry_kriek.tooltip":"Rigenerazione 0:20",
+  "item.drinkbeer.beer_mug_haars_icey_pale_lager.tooltip": "Viandante del Gelo Ubriaco 1:00",
+  "item.drinkbeer.beer_mug_night_howl_kvass.tooltip": "Visione Notturna 2:00-7:00 (è proporzionale alle fasi lunari con il massimo alla luna piena)",
+
+  "drinkbeer.restores_hunger": "Fame Ripristinata: ",
+  "effect.drinkbeer.drunk_frost_walker": "Viandante del Gelo Ubriaco"
+}
