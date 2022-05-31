@@ -18,6 +18,7 @@ public class DrinkBeer {
         SoundEventRegistry.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
         MobEffectRegistry.STATUS_EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ContainerTypeRegistry.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        RecipeRegistry.RECIPE_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         RecipeRegistry.RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         // We just don't need these part now
