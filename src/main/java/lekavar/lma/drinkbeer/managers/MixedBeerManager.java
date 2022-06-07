@@ -44,7 +44,7 @@ public class MixedBeerManager {
         tags.put("MixedBeer", tag);
         tag.putInt("beerId", beerId);
         tag.putIntArray("spiceList", spiceList);
-        resultStack.setTag(tag);
+        // resultStack.setTag(tag);
 
         return resultStack;
     }

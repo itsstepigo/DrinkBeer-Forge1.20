@@ -1,5 +1,6 @@
 package lekavar.lma.drinkbeer.blocks;
 
+import lekavar.lma.drinkbeer.blockentities.MixedBeerBlockEntity;
 import lekavar.lma.drinkbeer.managers.MixedBeerManager;
 import lekavar.lma.drinkbeer.managers.SpiceAndFlavorManager;
 import lekavar.lma.drinkbeer.utils.beer.Beers;
@@ -15,9 +16,11 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -27,11 +30,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MixedBeerBlock extends Block{
+public class MixedBeerBlock extends BaseEntityBlock {
     public final static VoxelShape ONE_MUG_SHAPE = Block.box(4, 0, 4, 12, 6, 12);
 
     public static final IntegerProperty BEER_ID = IntegerProperty.create("beer_id", 0, Beers.SIZE);
@@ -98,6 +102,12 @@ public class MixedBeerBlock extends Block{
     public void setSpiceList(List<Integer> spiceList) {
         this.spiceList.clear();
         this.spiceList.addAll(spiceList);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new MixedBeerBlockEntity(blockPos, blockState, blockState.getValue(BEER_ID), this.spiceList);
     }
 
     @Override

@@ -120,11 +120,8 @@ public class SpiceAndFlavorManager {
                     case SPICY, FIERY -> applySpicyFlavorValue(mixedBeerOnUsing, flavor);
                     case AROMATIC, AROMATIC1 -> applyAromiticFlavorValue(mixedBeerOnUsing, flavor);
                     case REFRESHING, REFRESHING1 -> applyRefreshingFlavorValue(mixedBeerOnUsing, flavor);
-                    case NUTTY -> applyNuttyFlavorAction(mixedBeerOnUsing, flavor);
-                    case SWEET -> applySweetFlavorAction(mixedBeerOnUsing, flavor);
-                    case LUSCIOUS -> applySweetFlavorAction(mixedBeerOnUsing, flavor);
-                    case CLOYING -> applySweetFlavorAction(mixedBeerOnUsing, flavor);
-                    case NUTTY1 -> applyNuttyFlavorAction(mixedBeerOnUsing, flavor);
+                    case NUTTY, NUTTY1 -> applyNuttyFlavorAction(mixedBeerOnUsing, flavor);
+                    case SWEET, CLOYING, LUSCIOUS -> applySweetFlavorAction(mixedBeerOnUsing, flavor);
                     case MELLOW -> applyMellowFlavorAction(mixedBeerOnUsing, flavor);
                     default -> mixedBeerOnUsing.addAction(flavor);
                 }
@@ -149,7 +146,6 @@ public class SpiceAndFlavorManager {
                         if (!MixedBeerManager.hasActionAfter(i, Flavors.DRYING, mixedBeerOnUsing.getActionList())) {
                             applyDryingFlavorAction(MixedBeerManager.getActionedTimes(i, Flavors.DRYING, mixedBeerOnUsing.getActionList()), world, user);
                         }
-                        break;
                     }
                 }
             }
@@ -228,7 +224,7 @@ public class SpiceAndFlavorManager {
                 for (int z = zStart; z < zEnd; z++) {
                     BlockPos pos = user.blockPosition().offset(x, y, z);
                     BlockState blockState = world.getBlockState(pos);
-                    if (BlockTags.LOGS.contains(blockState.getBlock()) || BlockTags.LEAVES.contains(blockState.getBlock())) {
+                    if (blockState.is(BlockTags.LOGS) || blockState.is(BlockTags.LEAVES)) {
                         world.destroyBlock(pos, true);
                     }
                 }
@@ -238,33 +234,22 @@ public class SpiceAndFlavorManager {
 
     public static void applyNuttyFlavorAction(MixedBeerOnUsing mixedBeerOnUsing, Flavors flavor) {
         switch (flavor) {
-            case NUTTY:
-                mixedBeerOnUsing.addHunger(4);
-                break;
-            case NUTTY1:
-                mixedBeerOnUsing.addHunger(5);
-                break;
+            case NUTTY -> mixedBeerOnUsing.addHunger(4);
+            case NUTTY1 -> mixedBeerOnUsing.addHunger(5);
         }
     }
 
     public static void applySweetFlavorAction(MixedBeerOnUsing mixedBeerOnUsing, Flavors flavor) {
         switch (flavor) {
-            case SWEET:
-                mixedBeerOnUsing.addHealth(3);
-                break;
-            case LUSCIOUS:
-                mixedBeerOnUsing.addHealth(4);
-                break;
-            case CLOYING:
-                mixedBeerOnUsing.addHealth(1);
+            case SWEET -> mixedBeerOnUsing.addHealth(3);
+            case LUSCIOUS -> mixedBeerOnUsing.addHealth(4);
+            case CLOYING -> mixedBeerOnUsing.addHealth(1);
         }
     }
 
     public static void applyMellowFlavorAction(MixedBeerOnUsing mixedBeerOnUsing, Flavors flavor) {
         switch (flavor) {
-            case MELLOW:
-                mixedBeerOnUsing.addSpecificStatusEffectDuration(MobEffects.DAMAGE_RESISTANCE, 1600);
-                break;
+            case MELLOW -> mixedBeerOnUsing.addSpecificStatusEffectDuration(MobEffects.DAMAGE_RESISTANCE, 1600);
         }
     }
 
@@ -278,29 +263,25 @@ public class SpiceAndFlavorManager {
         Direction direction = user.getMotionDirection();
 
         switch (direction) {
-            case NORTH: {
+            case NORTH -> {
                 xStart = -halfRange;
                 xEnd = halfRange + 1;
                 zStart = -range;
-                break;
             }
-            case SOUTH: {
+            case SOUTH -> {
                 xStart = -halfRange;
                 xEnd = halfRange + 1;
                 zEnd = range;
-                break;
             }
-            case EAST: {
+            case EAST -> {
                 zStart = -halfRange;
                 zEnd = halfRange + 1;
                 xEnd = range;
-                break;
             }
-            case WEST: {
+            case WEST -> {
                 zStart = -halfRange;
                 zEnd = halfRange + 1;
                 xStart = -range;
-                break;
             }
         }
         for (int x = xStart; x < xEnd; x++) {

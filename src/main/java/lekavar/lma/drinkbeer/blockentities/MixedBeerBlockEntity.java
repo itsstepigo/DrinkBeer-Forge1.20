@@ -1,17 +1,12 @@
-/*
 package lekavar.lma.drinkbeer.blockentities;
 
-import lekavar.lma.drinkbeer.DrinkBeer;
 import lekavar.lma.drinkbeer.managers.MixedBeerManager;
 import lekavar.lma.drinkbeer.registries.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -38,7 +33,7 @@ public class MixedBeerBlockEntity extends BlockEntity {
     @Override
     public void saveAdditional(CompoundTag tag) {
         tag.putShort("beerId", (short) this.beerId);
-        tag.putIntArray("spiceList", getSpiceList() );
+        tag.putIntArray("spiceList", getSpiceList());
     }
 
     @Override
@@ -76,4 +71,3 @@ public class MixedBeerBlockEntity extends BlockEntity {
     }
 
 }
-*/

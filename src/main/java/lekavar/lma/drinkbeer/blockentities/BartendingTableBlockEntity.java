@@ -1,10 +1,12 @@
 package lekavar.lma.drinkbeer.blockentities;
 
 import lekavar.lma.drinkbeer.gui.BartendingTableContainer;
+import lekavar.lma.drinkbeer.items.BeerBlockItem;
 import lekavar.lma.drinkbeer.items.BeerMugItem;
 import lekavar.lma.drinkbeer.items.MixedBeerBlockItem;
 import lekavar.lma.drinkbeer.managers.MixedBeerManager;
 import lekavar.lma.drinkbeer.registries.BlockEntityRegistry;
+import lekavar.lma.drinkbeer.utils.ItemStackHelper;
 import lekavar.lma.drinkbeer.utils.beer.Beers;
 import lekavar.lma.drinkbeer.utils.mixedbeer.Spices;
 import net.minecraft.core.BlockPos;
@@ -21,7 +23,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -31,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
+    public static final int OUTPUT_SLOT_INDEX = MixedBeerManager.MAX_SPICES_COUNT + 1;
+
     private NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
     private int beerId = Beers.EMPTY_BEER_ID;
     private int isMixedBeer = 0;
@@ -69,19 +72,19 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
 
     public List<Integer> getBeerInputSpiceList(){
         List<Integer> inputSpiceList = new ArrayList<>();
-         ItemStack stack =  items.get(0);
-        if ( stack.getItem() instanceof MixedBeerBlockItem) {
+        ItemStack stack = getBeerInput();
+        if (stack.getItem() instanceof MixedBeerBlockItem) {
             return MixedBeerManager.getSpiceList(stack);
         } else {
             return inputSpiceList;
         }
     }
     public int getInputSpicesNum(){
-        for(int i = 1; i < MixedBeerManager.MAX_SPICES_COUNT; i++)
+        for(int i = 0; i < MixedBeerManager.MAX_SPICES_COUNT; i++)
         {
-            if(items.get(i).isEmpty())
+            if(items.get(1 + i).isEmpty())
             {
-                return i - 2;
+                return i;
             }
         }
         return MixedBeerManager.MAX_SPICES_COUNT;
@@ -96,56 +99,72 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
 
     public void tickServer() {
         ItemStack input = items.get(0);
-        if (input == ItemStack.EMPTY || input.getItem().equals(Items.AIR)) {
-            items.set(0,ItemStack.EMPTY);
+        if (ItemStackHelper.isAirOrEmpty(input)) {
+            items.set(OUTPUT_SLOT_INDEX, ItemStack.EMPTY);
             setChanged();
             return;
         }
 
-        if(! (input.getItem() instanceof BeerMugItem))
-        {
-            return;
-        }
-        //Mark all spices in spiceSlot are not used, so they are currently not marked to be consumed
-        resetUsedSlots();
-
-        int beerId = MixedBeerManager.getBeerId(input);
         ItemStack resultStack;
-        Item beer = input.getItem();
-        //If is basic liquor and there's no spices, the result is basic liquor itself
-        if (! ( beer instanceof MixedBeerBlockItem) && getInputSpicesNum() == 0) {
-            resultStack = new ItemStack(Beers.byId(beerId).getBeerItem(), 1);
-            items.set(MixedBeerManager.MAX_SPICES_COUNT + 1, resultStack);
-            setChanged();
-        } else { //Otherwise the result must be mixed beer
-            List<Integer> oriSpiceList = new ArrayList<>();
-            oriSpiceList = (beer instanceof MixedBeerBlockItem) ? getBeerInputSpiceList() : oriSpiceList;
-            for (int i = 0; i < MixedBeerManager.MAX_SPICES_COUNT; i++) {
-                ItemStack stack = items.get(i + 1);
-                //If maximum amount of spice is already in beer, there's no need to check spiceSlot
-                if (oriSpiceList.size() < MixedBeerManager.MAX_SPICES_COUNT) {
-                    //Check if spiceSlot is not empty
-                    if (stack != ItemStack.EMPTY) {
-                        //If there are enough spices, insert new spice in the middle or at the start
-                        if (i < oriSpiceList.size()) {
-                            oriSpiceList.add(i, Spices.byItem(stack.getItem()).getId());
+        if(! (input.getItem() instanceof BeerBlockItem))
+        {
+            resultStack = ItemStack.EMPTY;
+        }
+        else {
+            //Mark all spices in spiceSlot are not used, so they are currently not marked to be consumed
+            resetUsedSlots();
+
+            int beerId = getBeerInputBeerId();
+            Item beer = input.getItem();
+            boolean isInputMixedBeer = beer instanceof MixedBeerBlockItem;
+            //If is basic liquor and there's no spices, the result is basic liquor itself
+            if (!isInputMixedBeer && getInputSpicesNum() == 0) {
+                resultStack = new ItemStack(Beers.byId(beerId).getBeerItem(), 1);
+            } else { //Otherwise the result must be mixed beer
+                List<Integer> oriSpiceList = new ArrayList<>();
+                oriSpiceList = isInputMixedBeer ? getBeerInputSpiceList() : oriSpiceList;
+                for (int i = 0; i < MixedBeerManager.MAX_SPICES_COUNT; i++) {
+                    ItemStack stack = items.get(i + 1);
+                    //If maximum amount of spice is already in beer, there's no need to check spiceSlot
+                    if (oriSpiceList.size() < MixedBeerManager.MAX_SPICES_COUNT) {
+                        //Check if spiceSlot is not empty
+                        if (!ItemStackHelper.isAirOrEmpty(stack)) {
+                            //If there are enough spices, insert new spice in the middle or at the start
+                            if (i < oriSpiceList.size()) {
+                                oriSpiceList.add(i, Spices.byItem(stack.getItem()).getId());
+                            }
+                            else {//Otherwise insert new spice at the end
+                                oriSpiceList.add(Spices.byItem(stack.getItem()).getId());
+                            }
+                            //Mark spice in spiceSlot#i will be consumed to mix beer
+                            usedSlots[i] = true;
                         }
-                        else {//Otherwise insert new spice at the end
-                            oriSpiceList.add(Spices.byItem(stack.getItem()).getId());
-                        }
-                        //Mark spice in spiceSlot#i will be consumed to mix beer
-                        usedSlots[i] = true;
                     }
                 }
+                //Generate result item stack by beerId and spiceList
+                resultStack = MixedBeerManager.genMixedBeerItemStack(beerId, oriSpiceList);
             }
-            //Generate result item stack by beerId and spiceList
-            resultStack = MixedBeerManager.genMixedBeerItemStack(beerId, oriSpiceList);
-            items.set(MixedBeerManager.MAX_SPICES_COUNT + 1, resultStack);
-            setChanged();
         }
-
+        items.set(OUTPUT_SLOT_INDEX, resultStack);
+        setChanged();
     }
 
+    private ItemStack getBeerInput()
+    {
+        return items.get(0);
+    }
+
+    private boolean isMixedBeer()
+    {
+        return getBeerInput().getItem() instanceof MixedBeerBlockItem;
+    }
+
+    private int getBeerInputBeerId() {
+        if (isMixedBeer()) {
+            return MixedBeerManager.getBeerId(getBeerInput());
+        } else
+            return Beers.byItem(getBeerInput().getItem()).getId();
+    }
 
     public void clearInputs()
     {
@@ -166,12 +185,12 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("block.drinkbeer.bartending_table");
+        return new TranslatableComponent("block.drinkbeer.bartending_table_normal");
     }
 
     @Override
     protected Component getDefaultName() {
-        return new TranslatableComponent("block.drinkbeer.bartending_table");
+        return new TranslatableComponent("block.drinkbeer.bartending_table_normal");
     }
 
     @Nullable
@@ -231,6 +250,10 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
                 //Read spiceList
                 this.spiceList = MixedBeerManager.getSpiceList(beerItemStack);
             }
+
+            ItemStack oriBeerItemStack = isMixedBeer == 1 ? MixedBeerManager.genMixedBeerItemStack(beerId, spiceList) : new ItemStack(Beers.byId(beerId).getBeerItem(), 1);
+            setItem(0, oriBeerItemStack);
+
             return true;
         } catch (Exception e) {
             System.out.println("Something wrong when reading beer properties in BartendingTableEntity");

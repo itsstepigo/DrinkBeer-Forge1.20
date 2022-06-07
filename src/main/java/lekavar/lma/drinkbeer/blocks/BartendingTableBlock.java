@@ -110,7 +110,6 @@ public class BartendingTableBlock extends BaseEntityBlock {
         }
     }
 
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {

@@ -55,7 +55,7 @@ public class BartendingTableContainer  extends AbstractContainerMenu {
         addSlot(new SpiceInputSlot(bartendingSpace, 3, 67, 52, bartendingTableBlockEntity));
 
         // Output
-        addSlot(new OutputSlot(bartendingSpace, 0, 128, 34, syncData, bartendingTableBlockEntity));
+        addSlot(new OutputSlot(bartendingSpace, 4, 128, 34, syncData, bartendingTableBlockEntity));
 
         //Tracking Data
         addDataSlots(syncData);
@@ -150,7 +150,7 @@ public class BartendingTableContainer  extends AbstractContainerMenu {
     public void removed(Player player) {
         if (!player.level.isClientSide()) {
             // Return Item to Player;
-            for (int i = 0; i < MixedBeerManager.MAX_SPICES_COUNT + 1; i++) {
+            for (int i = 0; i <= MixedBeerManager.MAX_SPICES_COUNT; i++) {
                 if (!bartendingSpace.getItem(i).isEmpty()) {
                     ItemHandlerHelper.giveItemToPlayer(player, bartendingSpace.removeItem(i, bartendingSpace.getItem(i).getCount()));
                 }

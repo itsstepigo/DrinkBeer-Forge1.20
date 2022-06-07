@@ -37,14 +37,16 @@ public class MixedBeerBlockItem extends BeerBlockItem {
         //Base beer
         int beerId = MixedBeerManager.getBeerId(stack);
         Item beerItem = Beers.byId(beerId).getBeerItem();
-        String beerName = beerId > Beers.EMPTY_BEER_ID ? beerItem.toString()
+        String beerName = beerId > Beers.EMPTY_BEER_ID ? "block.drinkbeer." + beerItem.toString()
                 : MixedBeerManager.getUnmixedToolTipTranslationKey();
+        String beerTooltip = beerId > Beers.EMPTY_BEER_ID ? "item.drinkbeer." + beerItem.toString() + ".tooltip"
+                : "";
+
         tooltip.add(new TranslatableComponent(beerName).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
         //Base status effect tooltip
         if (beerId > Beers.EMPTY_BEER_ID) {
-            String name = beerItem.asItem().toString();
             if (Beers.byId(beerId).getHasStatusEffectTooltip()) {
-                tooltip.add(new TranslatableComponent("item.drinkbeer." + name + ".tooltip").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
+                tooltip.add(new TranslatableComponent(beerTooltip).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
             }
         }
         //Base food level
@@ -89,8 +91,8 @@ public class MixedBeerBlockItem extends BeerBlockItem {
     public Component getMixedBeerName(ItemStack stack) {
         int beerId = MixedBeerManager.getBeerId(stack);
         Item beerItem = Beers.byId(beerId).getBeerItem();
-        String beerName = beerId > Beers.EMPTY_BEER_ID ? "item.drinkbeer." + beerItem.asItem().toString(): "block.drinkbeer.empty_beer_mug";
-        Component name = new TranslatableComponent(beerName).append(new TranslatableComponent(MixedBeerManager.getMixedBeerTranslationKey())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.YELLOW));
+        String beerName = beerId > Beers.EMPTY_BEER_ID ? "block.drinkbeer." + beerItem.toString(): "block.drinkbeer.empty_beer_mug";
+        Component name = new TranslatableComponent(beerName).append(new TranslatableComponent("block.drinkbeer." + MixedBeerManager.getMixedBeerTranslationKey())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.YELLOW));
         return name;
     }
 
