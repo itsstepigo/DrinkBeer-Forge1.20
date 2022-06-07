@@ -42,7 +42,7 @@ public class RecipeBoardPackageBlock extends Block {
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!world.isClientSide()) {
-            world.playSound(null, pos, SoundEventRegistry.UNPACKING_PACKAGE.get(), SoundSource.BLOCKS, 0.8f, 1f);
+            world.playSound(null, pos, SoundEventRegistry.UNPACKING.get(), SoundSource.BLOCKS, 0.8f, 1f);
             getRecipeBoardDrop().forEach(itemStack -> Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 1);
         }

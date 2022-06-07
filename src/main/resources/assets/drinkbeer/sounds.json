@@ -6,47 +6,72 @@
   },
   "pouring": {
     "sounds": [
-      "drinkbeer:pouring"
+	  "drinkbeer:pouring"
     ]
   },
   "pouring_christmas":{
-    "sounds": [
-      "drinkbeer:pouring_christmas"
+  "sounds": [
+	  "drinkbeer:pouring_christmas"
     ]
   },
-  "iron_call_bell_tinkling":{
-    "sounds": [
-      "drinkbeer:iron_call_bell_tinkling"
+  "iron_call_bell_tinkle":{
+  "sounds": [
+	  "drinkbeer:iron_call_bell_tinkle"
     ]
   },
-  "golden_call_bell_tinkling":{
-    "sounds": [
-      "drinkbeer:golden_call_bell_tinkling"
+  "golden_call_bell_tinkle":{
+  "sounds": [
+	  "drinkbeer:golden_call_bell_tinkle"
     ]
   },
-  "night_howl_drinking_effect_1":{
-    "sounds": [
-      "drinkbeer:night_howl_drinking_effect_1"
+  "lekas_call_bell_tinkle":{
+  "sounds": [
+	  "drinkbeer:lekas_call_bell_tinkle"
     ]
   },
-  "night_howl_drinking_effect_2":{
-    "sounds": [
-      "drinkbeer:night_howl_drinking_effect_2"
+  "night_howl0":{
+  "sounds": [
+	  "drinkbeer:night_howl0"
     ]
   },
-  "night_howl_drinking_effect_3":{
-    "sounds": [
-      "drinkbeer:night_howl_drinking_effect_3"
+  "night_howl1":{
+  "sounds": [
+	  "drinkbeer:night_howl1"
     ]
   },
-  "night_howl_drinking_effect_4":{
-    "sounds": [
-      "drinkbeer:night_howl_drinking_effect_4"
+  "night_howl2":{
+  "sounds": [
+	  "drinkbeer:night_howl2"
     ]
   },
-  "unpacking_package":{
-    "sounds": [
-      "drinkbeer:unpacking_package"
+  "night_howl3":{
+  "sounds": [
+	  "drinkbeer:night_howl3"
+    ]
+  },
+  "unpacking":{
+  "sounds": [
+	  "drinkbeer:unpacking"
+    ]
+  },
+  "bartending_table_close":{
+  "sounds": [
+	  "drinkbeer:bartending_table_close"
+    ]
+  },
+  "bartending_table_open":{
+  "sounds": [
+	  "drinkbeer:bartending_table_open"
+    ]
+  },
+  "tradebox_open":{
+  "sounds": [
+	  "drinkbeer:tradebox_open"
+    ]
+  },
+  "tradebox_close":{
+  "sounds": [
+	  "drinkbeer:tradebox_close"
     ]
   }
 }

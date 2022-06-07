@@ -196,15 +196,16 @@ public class BeerBarrelContainer extends AbstractContainerMenu {
         // After player picking up product, play pour sound effect
         // statusCode reset is handled by TileEntity#tick
         @Override
-        public void onTake(Player p_190901_1_, ItemStack p_190901_2_) {
-            /*if(p_190901_2_.getItem() == ItemRegistry.BEER_MUG_FROTHY_PINK_EGGNOG.get()){
-                p_190901_1_.level.playSound((PlayerEntity)null, beerBarrelTileEntity.getBlockPos(), SoundEventRegistry.POURING_CHRISTMAS_VER.get(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+        public void onTake(Player player, ItemStack p_190901_2_) {
+            if (p_190901_2_.getItem() == ItemRegistry.BEER_MUG_FROTHY_PINK_EGGNOG.get()) {
+                player.level.playSound((Player) null, beerBarrelBlockEntity.getBlockPos(), SoundEventRegistry.POURING_CHRISTMAS.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 //p_190901_1_.level.playSound(p_190901_1_, p_190901_1_.blockPosition(), SoundEventRegistry.POURING_CHRISTMAS_VER.get(), SoundCategory.BLOCKS, 1f, 1f);
 
-            } else {*/
-            p_190901_1_.level.playSound((Player) null, beerBarrelBlockEntity.getBlockPos(), SoundEventRegistry.POURING.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
-            //p_190901_1_.level.playSound(p_190901_1_, p_190901_1_.blockPosition(), SoundEventRegistry.POURING.get(), SoundCategory.BLOCKS, 1f, 1f);
-            //}
+            } else {
+                player.level.playSound((Player) null, beerBarrelBlockEntity.getBlockPos(), SoundEventRegistry.POURING.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                //p_190901_1_.level.playSound(p_190901_1_, p_190901_1_.blockPosition(), SoundEventRegistry.POURING.get(), SoundCategory.BLOCKS, 1f, 1f);
+                //}
+            }
         }
 
         // Placing item on output slot is prohibited.
@@ -213,7 +214,7 @@ public class BeerBarrelContainer extends AbstractContainerMenu {
             return false;
         }
 
-        // Only statusCode is 2 (waiting for pickup), pickup is allowed.
+        // Only when the statusCode is 2 (waiting for pickup), pickup is allowed.
         @Override
         public boolean mayPickup(Player p_82869_1_) {
             return syncData.get(STATUS_CODE) == 2;
