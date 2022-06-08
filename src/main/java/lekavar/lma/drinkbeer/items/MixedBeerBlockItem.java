@@ -1,5 +1,6 @@
 package lekavar.lma.drinkbeer.items;
 
+import lekavar.lma.drinkbeer.blockentities.MixedBeerBlockEntity;
 import lekavar.lma.drinkbeer.blocks.MixedBeerBlock;
 import lekavar.lma.drinkbeer.managers.MixedBeerManager;
 import lekavar.lma.drinkbeer.managers.SpiceAndFlavorManager;
@@ -105,10 +106,15 @@ public class MixedBeerBlockItem extends BeerBlockItem {
 
     @Override
     protected boolean placeBlock(BlockPlaceContext context, BlockState state) {
-        ItemStack stack = context.getItemInHand();
-        ((MixedBeerBlock) state.getBlock()).setBeerId(MixedBeerManager.getBeerId(stack));
-        ((MixedBeerBlock) state.getBlock()).setSpiceList(MixedBeerManager.getSpiceList(stack));
-        return super.placeBlock(context, state);
+        if (super.placeBlock(context, state)) {
+            // ItemStack stack = context.getItemInHand();
+
+            // MixedBeerBlockEntity entity = (MixedBeerBlockEntity) context.getLevel().getBlockEntity(context.getClickedPos());
+            // entity.updateIngredient(MixedBeerManager.getBeerId(stack), MixedBeerManager.getSpiceList(stack));
+            return true;
+        }
+
+        return false;
     }
 
     @Override

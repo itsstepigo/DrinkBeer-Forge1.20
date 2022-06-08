@@ -37,14 +37,14 @@ public class MixedBeerManager {
 
     public static ItemStack genMixedBeerItemStack(int beerId, List<Integer> spiceList) {
         ItemStack resultStack = new ItemStack(ItemRegistry.MIXED_BEER.get(), 1);
-
         spiceList = removeIllegalSpiceId(spiceList);
+
+        // tag with key name "BlockEntityTag" will be passed to related BlockEntity automatically
         CompoundTag tags = resultStack.getOrCreateTagElement("BlockEntityTag");
         CompoundTag tag = new CompoundTag();
         tags.put("MixedBeer", tag);
         tag.putInt("beerId", beerId);
         tag.putIntArray("spiceList", spiceList);
-        // resultStack.setTag(tag);
 
         return resultStack;
     }

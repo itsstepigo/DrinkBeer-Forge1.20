@@ -30,22 +30,43 @@ public class MixedBeerBlockEntity extends BlockEntity {
         this.spiceList.addAll(spiceList);
     }
 
+    /**
+     * @see MixedBeerManager#genMixedBeerItemStack(int, List) 
+     */
     @Override
     public void saveAdditional(CompoundTag tag) {
-        tag.putShort("beerId", (short) this.beerId);
-        tag.putIntArray("spiceList", getSpiceList());
+        CompoundTag descriptorTag = new CompoundTag();
+        descriptorTag.putInt("beerId", getBeerId());
+        descriptorTag.putIntArray("spiceList", getSpiceList());
+
+        tag.put("MixedBeer", descriptorTag);
     }
 
     @Override
     public void load(@Nonnull CompoundTag tag) {
         super.load(tag);
-        this.beerId = tag.getShort("beerId");
-        for (int spice: tag.getIntArray("spiceList")) {
+        CompoundTag descriptorTag = tag.getCompound("MixedBeer");
+        this.beerId = descriptorTag.getShort("beerId");
+        this.spiceList.clear();
+        for (int spice: descriptorTag.getIntArray("spiceList")) {
             this.spiceList.add(spice);
         }
     }
 
-    public ItemStack getPickStack(BlockState state) {
+    @Override
+    public void handleUpdateTag(CompoundTag tag) {
+        super.handleUpdateTag(tag); // will directly call load()
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = super.getUpdateTag();
+        saveAdditional(tag);
+
+        return tag;
+    }
+
+    public ItemStack getPickStack() {
         //Generate mixed beer item stack for dropping
         ItemStack resultStack = MixedBeerManager.genMixedBeerItemStack(this.beerId, this.spiceList);
         return resultStack;

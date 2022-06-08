@@ -38,22 +38,13 @@ import java.util.Random;
 public class MixedBeerBlock extends BaseEntityBlock {
     public final static VoxelShape ONE_MUG_SHAPE = Block.box(4, 0, 4, 12, 6, 12);
 
-    public static final IntegerProperty BEER_ID = IntegerProperty.create("beer_id", 0, Beers.SIZE);
-    public List<Integer> spiceList;
-
     public MixedBeerBlock() {
         super(Properties.of(Material.WOOD).strength(1.0f).noOcclusion());
-        this.registerDefaultState(this.defaultBlockState().setValue(BEER_ID,Beers.DEFAULT_BEER_ID));
-        this.spiceList = new ArrayList<>();
     }
+
     @Override
     public VoxelShape getShape(BlockState p_220053_1_, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
         return ONE_MUG_SHAPE;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BEER_ID);
     }
 
     @Override
@@ -86,28 +77,21 @@ public class MixedBeerBlock extends BaseEntityBlock {
 
     @Override
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
-        try {
-            ItemStack mixedBeerItemStack = MixedBeerManager.genMixedBeerItemStack(state.getValue(BEER_ID), this.spiceList);
-            Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), mixedBeerItemStack );
-        } catch (Exception e) {
+        MixedBeerBlockEntity te = (MixedBeerBlockEntity) world.getBlockEntity(pos);
+        if (te != null) {
+            ItemStack mixedBeerItemStack = te.getPickStack();
+            Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), mixedBeerItemStack);
+        }
+        else {
             System.out.println("Somthing wrong with dropping mixed beer item stack!");
         }
         super.onRemove(state, world, pos, newState, moved);
     }
 
-    public void setBeerId(int beerId) {
-        this.registerDefaultState(this.defaultBlockState().setValue(BEER_ID, beerId));
-    }
-
-    public void setSpiceList(List<Integer> spiceList) {
-        this.spiceList.clear();
-        this.spiceList.addAll(spiceList);
-    }
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new MixedBeerBlockEntity(blockPos, blockState, blockState.getValue(BEER_ID), this.spiceList);
+        return new MixedBeerBlockEntity(blockPos, blockState);
     }
 
     @Override
@@ -120,7 +104,8 @@ public class MixedBeerBlock extends BaseEntityBlock {
         if(world.isClientSide()) {
             super.animateTick(state, world, pos, random);
             if (random.nextInt(5) == 0) {
-                SimpleParticleType particle = SpiceAndFlavorManager.getLastSpiceFlavorParticle(this.spiceList);
+                MixedBeerBlockEntity entity = (MixedBeerBlockEntity) world.getBlockEntity(pos);
+                SimpleParticleType particle = SpiceAndFlavorManager.getLastSpiceFlavorParticle(entity.getSpiceList());
                 if (random.nextInt(5) == 0) {
                     double x = (double) pos.getX() + 0.5D;
                     double y = (double) pos.getY() + 0.5D + random.nextDouble() / 4;

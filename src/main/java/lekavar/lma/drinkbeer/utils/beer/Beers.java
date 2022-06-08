@@ -36,8 +36,6 @@ public enum  Beers {
     BEER_MUG_NIGHT_HOWL_KVASS(9, ItemRegistry.BEER_MUG_NIGHT_HOWL_KVASS.get(), true/*, new BeerRecipe()
             .setBeerResultNum(4).setBrewingTime(18000)
             .addMaterial(2, Items.BREAD).addMaterial(Items.BONE).addMaterial(Items.WATER_BUCKET)*/);
-    //Update SIZE when add new beer!!!!!!!!!;
-    public static final int SIZE = 9;
 
     public static final int DEFAULT_BEER_ID = 1;
     public static final Beers DEFAULT_BEER = Beers.BEER_MUG;
