@@ -1,6 +1,7 @@
 package lekavar.lma.drinkbeer;
 
 import lekavar.lma.drinkbeer.client.DrinkBeerClient;
+import lekavar.lma.drinkbeer.networking.NetWorking;
 import lekavar.lma.drinkbeer.registries.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -29,6 +30,7 @@ public class DrinkBeer {
         ParticleRegistry.PARTICLES.register(bus);
 
         bus.addListener(DrinkBeerClient::onInitializeClient);
+        bus.addListener(NetWorking::init);
         // We just don't need these part now
         // Register the setup method for modloading
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);

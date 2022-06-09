@@ -35,6 +35,8 @@ public class MixedBeerBlockEntity extends BlockEntity {
      */
     @Override
     public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+
         CompoundTag descriptorTag = new CompoundTag();
         descriptorTag.putInt("beerId", getBeerId());
         descriptorTag.putIntArray("spiceList", getSpiceList());
@@ -45,6 +47,7 @@ public class MixedBeerBlockEntity extends BlockEntity {
     @Override
     public void load(@Nonnull CompoundTag tag) {
         super.load(tag);
+
         CompoundTag descriptorTag = tag.getCompound("MixedBeer");
         this.beerId = descriptorTag.getShort("beerId");
         this.spiceList.clear();

@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
@@ -42,8 +43,8 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
 
     public final ContainerData syncData = new ContainerData() {
         @Override
-        public int get(int p_221476_1_) {
-            switch (p_221476_1_) {
+        public int get(int index) {
+            switch (index) {
                 case 0:
                     return beerId;
                 case 1:
@@ -54,13 +55,13 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
         }
 
         @Override
-        public void set(int p_221477_1_, int p_221477_2_) {
-            switch (p_221477_1_) {
+        public void set(int index, int value) {
+            switch (index) {
                 case 0:
-                    beerId = p_221477_2_;
+                    beerId = value;
                     break;
                 case 1:
-                    isMixedBeer = p_221477_2_;
+                    isMixedBeer = value;
                     break;
             }
         }
@@ -91,10 +92,7 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
     }
 
     private void resetUsedSlots(){
-        for(int i = 0; i < usedSlots.length; i++)
-        {
-            usedSlots[i] = false;
-        }
+        Arrays.fill(usedSlots, false);
     }
 
     public void tickServer() {
@@ -217,7 +215,6 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
 
     @Override
     public CompoundTag getUpdateTag() {
-
         CompoundTag tag = super.getUpdateTag();
         ContainerHelper.saveAllItems(tag, this.items);
         tag.putShort("beerId", (short) this.beerId);
@@ -225,6 +222,7 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
         tag.putIntArray("spiceList", spiceList);
         return tag;
     }
+
     @Override
     public void handleUpdateTag(CompoundTag tag) {
         ContainerHelper.loadAllItems(tag, this.items);
@@ -263,6 +261,8 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
 
     @Override
     public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+
         ContainerHelper.saveAllItems(tag, this.items);
         tag.putShort("beerId", (short) this.beerId);
         tag.putShort("isMixedBeer", (short) this.isMixedBeer);
