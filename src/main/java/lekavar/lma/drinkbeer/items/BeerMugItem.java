@@ -1,5 +1,7 @@
 package lekavar.lma.drinkbeer.items;
 
+import lekavar.lma.drinkbeer.effects.DrunkStatusEffect;
+import lekavar.lma.drinkbeer.effects.NightHowlStatusEffect;
 import lekavar.lma.drinkbeer.registries.ItemRegistry;
 import lekavar.lma.drinkbeer.registries.SoundEventRegistry;
 import lekavar.lma.drinkbeer.utils.ModCreativeTab;
@@ -33,33 +35,30 @@ import java.util.Random;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class BeerMugItem extends BlockItem {
+public class BeerMugItem extends BeerBlockItem {
     private final static double MAX_PLACE_DISTANCE = 2.0D;
-    private final static int BASE_NIGHT_VISION_TIME = 2400;
     private final boolean hasExtraTooltip;
 
     public BeerMugItem(Block block, int nutrition, boolean hasExtraTooltip) {
-        super(block, new Item.Properties().tab(ModCreativeTab.BEAR).stacksTo(16)
+        super(block,new Item.Properties().tab(ModCreativeTab.BEER).stacksTo(16)
                 .food(new FoodProperties.Builder().nutrition(nutrition).alwaysEat().build()));
         this.hasExtraTooltip = hasExtraTooltip;
     }
 
-    public BeerMugItem(Block block, int nutrition, MobEffect effect, int duration, boolean hasExtraTooltip) {
-        super(block, new Item.Properties().tab(ModCreativeTab.BEAR).stacksTo(16)
-                .food(new FoodProperties.Builder().nutrition(nutrition).alwaysEat().effect(() -> new MobEffectInstance(effect, duration), 1).build()));
+    public BeerMugItem(Block block, @Nullable MobEffectInstance statusEffectInstance, int nutrition, boolean hasExtraTooltip) {
+        super(block,new Item.Properties().tab(ModCreativeTab.BEER).stacksTo(16)
+                .food(statusEffectInstance != null
+                        ? new FoodProperties.Builder().nutrition(nutrition).effect(statusEffectInstance, 1).alwaysEat().build()
+                        : new FoodProperties.Builder().nutrition(nutrition).alwaysEat().build()));
         this.hasExtraTooltip = hasExtraTooltip;
     }
 
-    public BeerMugItem(Block block, int nutrition, Supplier<MobEffectInstance> effectIn, boolean hasExtraTooltip) {
-        super(block, new Item.Properties().tab(ModCreativeTab.BEAR).stacksTo(16)
-                .food(new FoodProperties.Builder().nutrition(nutrition).alwaysEat().effect(effectIn, 1).build()));
+    public BeerMugItem(Block block, Supplier<MobEffectInstance> statusEffectInstance, int nutrition, boolean hasExtraTooltip) {
+        super(block,new Item.Properties().tab(ModCreativeTab.BEER).stacksTo(16)
+                .food(statusEffectInstance != null
+                        ? new FoodProperties.Builder().nutrition(nutrition).effect(statusEffectInstance, 1).alwaysEat().build()
+                        : new FoodProperties.Builder().nutrition(nutrition).alwaysEat().build()));
         this.hasExtraTooltip = hasExtraTooltip;
-    }
-
-
-    @Override
-    public SoundEvent getEatingSound() {
-        return SoundEventRegistry.DRINKING_BEER.get();
     }
 
     @Override
@@ -74,7 +73,7 @@ public class BeerMugItem extends BlockItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
         String name = this.asItem().toString();
-        if (hasEffectNoticeTooltip()) {
+        if (hasEffectNoticeTooltip() && world != null && world.isClientSide()) {
             tooltip.add(new TranslatableComponent("item.drinkbeer." + name + ".tooltip").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
         }
         String hunger = String.valueOf(stack.getItem().getFoodProperties().getNutrition());
@@ -86,41 +85,14 @@ public class BeerMugItem extends BlockItem {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity livingEntity) {
-        // Handle special drinking effect
-        if (stack.getItem() == ItemRegistry.BEER_MUG_NIGHT_HOWL_KVASS.get()) {
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, getNightVisionTime(world.getMoonPhase())));
-            if (!world.isClientSide()) {
-                world.playSound(null, livingEntity.blockPosition(), getRandomNightHowlSound(), SoundSource.PLAYERS, 1.2f, 1f);
-            }
-        }
-        // Return empty mug
-        if (livingEntity instanceof Player && ((Player) livingEntity).isCreative()) {
-            ItemStack temp = stack.copy();
-            livingEntity.eat(world,stack);
-            return temp;
-        } else {
-            if (stack.getCount() == 1) {
-                livingEntity.eat(world,stack);
-                return new ItemStack(ItemRegistry.EMPTY_BEER_MUG.get());
-            } else {
-                ItemStack emptyMug = new ItemStack(ItemRegistry.EMPTY_BEER_MUG.get(), 1);
-                if (livingEntity instanceof Player) {
-                    ItemHandlerHelper.giveItemToPlayer((Player) livingEntity, emptyMug);
-                } else {
-                    Containers.dropItemStack(world, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), emptyMug);
-                }
-                return super.finishUsingItem(stack, world, livingEntity);
-            }
-        }
-    }
+    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
+        //Give Drunk status effect
+        DrunkStatusEffect.addStatusEffect(user);
+        //Give Night Vision status effect if drank Night Howl Kvass
+        NightHowlStatusEffect.addStatusEffect(stack,world,user);
+        //Give empty mug back
+        giveEmptyMugBack(user);
 
-    private int getNightVisionTime(int moonPhase) {
-        return BASE_NIGHT_VISION_TIME + (moonPhase == 0 ? Math.abs(moonPhase - 1 - 4) * 1200 : Math.abs(moonPhase - 4) * 1200);
-    }
-
-    private SoundEvent getRandomNightHowlSound() {
-        List<SoundEvent> available = ForgeRegistries.SOUND_EVENTS.getValues().stream().filter(soundEvent -> soundEvent.getRegistryName().toString().contains("night_howl_drinking_effect")).collect(Collectors.toList());
-        return available.get(new Random().nextInt(available.size()));
+        return super.finishUsingItem(stack, world, user);
     }
 }

@@ -36,8 +36,8 @@ public class BeerBarrelBlockEntity extends BaseContainerBlockEntity implements I
     private int statusCode;
     public final ContainerData syncData = new ContainerData() {
         @Override
-        public int get(int p_221476_1_) {
-            switch (p_221476_1_) {
+        public int get(int index) {
+            switch (index) {
                 case 0:
                     return remainingBrewTime;
                 case 1:
@@ -48,13 +48,13 @@ public class BeerBarrelBlockEntity extends BaseContainerBlockEntity implements I
         }
 
         @Override
-        public void set(int p_221477_1_, int p_221477_2_) {
-            switch (p_221477_1_) {
+        public void set(int index, int value) {
+            switch (index) {
                 case 0:
-                    remainingBrewTime = p_221477_2_;
+                    remainingBrewTime = value;
                     break;
                 case 1:
-                    statusCode = p_221477_2_;
+                    statusCode = value;
                     break;
             }
         }
@@ -137,7 +137,7 @@ public class BeerBarrelBlockEntity extends BaseContainerBlockEntity implements I
     }
 
     private void startBrewing(BrewingRecipe recipe) {
-        // Pre-set bear to output Slot
+        // Pre-set beer to output Slot
         // This Step must be done first
         items.set(5, recipe.assemble(this));
         // Consume Ingredient & Cup;
@@ -190,6 +190,8 @@ public class BeerBarrelBlockEntity extends BaseContainerBlockEntity implements I
 
     @Override
     public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+
         ContainerHelper.saveAllItems(tag, this.items);
         tag.putShort("RemainingBrewTime", (short) this.remainingBrewTime);
         tag.putShort("statusCode", (short) this.statusCode);
@@ -198,6 +200,7 @@ public class BeerBarrelBlockEntity extends BaseContainerBlockEntity implements I
     @Override
     public void load(@Nonnull CompoundTag tag) {
         super.load(tag);
+
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(tag, this.items);
         this.remainingBrewTime = tag.getShort("RemainingBrewTime");

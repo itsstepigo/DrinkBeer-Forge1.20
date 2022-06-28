@@ -1,23 +1,21 @@
 package lekavar.lma.drinkbeer.utils;
 
 import lekavar.lma.drinkbeer.blocks.*;
-import lekavar.lma.drinkbeer.items.BeerMugItem;
 import lekavar.lma.drinkbeer.registries.BlockRegistry;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import org.lwjgl.system.CallbackI;
 
 import java.util.Comparator;
 
 public class ModCreativeTab {
-    public static final BearItemGroup BEAR = new BearItemGroup();
+    public static final BeerItemGroup BEER = new BeerItemGroup();
     public static final GeneralItemGroup GENERAL = new GeneralItemGroup();
 
-    static class BearItemGroup extends CreativeModeTab {
-        public BearItemGroup() {
+    static class BeerItemGroup extends CreativeModeTab {
+        public BeerItemGroup() {
             super("drinkbeer.beer");
         }
 

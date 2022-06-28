@@ -4,7 +4,6 @@ import lekavar.lma.drinkbeer.blockentities.BeerBarrelBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraft.server.level.ServerPlayer;
@@ -86,7 +85,7 @@ public class BeerBarrelBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntity) {
-        if (level.isClientSide()) {
+        if (level != null && level.isClientSide()) {
             return null;
         } else {
             return (theLevel, pos, state, tile) -> {
@@ -101,4 +100,5 @@ public class BeerBarrelBlock extends BaseEntityBlock {
     public RenderShape getRenderShape(BlockState p_49232_) {
         return RenderShape.MODEL;
     }
+
 }

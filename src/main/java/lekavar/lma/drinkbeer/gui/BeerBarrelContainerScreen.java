@@ -2,6 +2,7 @@ package lekavar.lma.drinkbeer.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import lekavar.lma.drinkbeer.DrinkBeer;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +12,7 @@ import java.awt.*;
 
 public class BeerBarrelContainerScreen extends AbstractContainerScreen<BeerBarrelContainer> {
 
-    private final ResourceLocation BEER_BARREL_CONTAINER_RESOURCE = new ResourceLocation("drinkbeer", "textures/gui/container/beer_barrel.png");
+    private final ResourceLocation BEER_BARREL_CONTAINER_RESOURCE = new ResourceLocation(DrinkBeer.MOD_ID, "textures/gui/container/beer_barrel.png");
     private final int textureWidth = 176;
     private final int textureHeight = 166;
     private Inventory inventory;

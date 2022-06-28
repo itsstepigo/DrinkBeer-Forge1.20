@@ -1,6 +1,9 @@
 package lekavar.lma.drinkbeer;
 
+import lekavar.lma.drinkbeer.client.DrinkBeerClient;
+import lekavar.lma.drinkbeer.networking.NetWorking;
 import lekavar.lma.drinkbeer.registries.*;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -11,16 +14,23 @@ public class DrinkBeer {
     // Directly reference a log4j logger.
     // private static final Logger LOGGER = LogManager.getLogger();
 
-    public DrinkBeer() {
-        ItemRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        BlockRegistry.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        BlockEntityRegistry.BLOKC_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        SoundEventRegistry.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MobEffectRegistry.STATUS_EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ContainerTypeRegistry.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        RecipeRegistry.RECIPE_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        RecipeRegistry.RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+    public static final String MOD_ID = "drinkbeer";
 
+    public DrinkBeer() {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        MobEffectRegistry.STATUS_EFFECTS.register(bus);
+        ItemRegistry.ITEMS.register(bus);
+        BlockRegistry.BLOCKS.register(bus);
+        BlockEntityRegistry.BLOKC_ENTITIES.register(bus);
+        SoundEventRegistry.SOUNDS.register(bus);
+        ContainerTypeRegistry.CONTAINERS.register(bus);
+        RecipeRegistry.RECIPE_TYPES.register(bus);
+        RecipeRegistry.RECIPE_SERIALIZERS.register(bus);
+        ParticleRegistry.PARTICLES.register(bus);
+
+        bus.addListener(DrinkBeerClient::onInitializeClient);
+        bus.addListener(NetWorking::init);
         // We just don't need these part now
         // Register the setup method for modloading
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
