@@ -93,7 +93,7 @@ public class DrunkStatusEffect extends MobEffect {
     }
 
     private static void decreaseDrunkStatusEffefct(LivingEntity entity, int amplifier) {
-        if (!entity.getLevel().isClientSide()) {
+        if (!entity.level().isClientSide()) {
             entity.removeEffect(MobEffectRegistry.DRUNK.get());
             MobEffectInstance nextDrunkStatusEffect = getDecreasedDrunkStatusEffect(amplifier);
             if (nextDrunkStatusEffect != null) {

@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+//TODO: material.Material
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -65,7 +66,7 @@ public class BeerBarrelBlock extends BaseEntityBlock {
 
             BlockEntity blockentity = world.getBlockEntity(pos);
             if (blockentity instanceof BeerBarrelBlockEntity) {
-                NetworkHooks.openGui((ServerPlayer) player, (BeerBarrelBlockEntity) blockentity, (FriendlyByteBuf packerBuffer) -> {
+                NetworkHooks.openScreen((ServerPlayer) player, (BeerBarrelBlockEntity) blockentity, (FriendlyByteBuf packerBuffer) -> {
                     packerBuffer.writeBlockPos(blockentity.getBlockPos());
                 });
             }

@@ -30,7 +30,7 @@ public class NetWorking {
                     if (screenContainer instanceof TradeBoxContainer) {
                         BlockPos pos = msg.getPos();
                         context.enqueueWork(() -> {
-                            TradeBoxBlockEntity tradeboxEntity = (TradeBoxBlockEntity) player.level.getBlockEntity(pos);
+                            TradeBoxBlockEntity tradeboxEntity = (TradeBoxBlockEntity) player.level().getBlockEntity(pos);
                             tradeboxEntity.screenHandler.setTradeboxCooling();
                         });
                     }

@@ -84,7 +84,6 @@ public class SpiceBlock extends HalfTransparentBlock {
         return Block.canSupportCenter(p_196260_2_, p_196260_3_.below(), Direction.UP);
     }
 
-    @Override
     public PushReaction getPistonPushReaction(BlockState state) {
         return PushReaction.DESTROY;
     }

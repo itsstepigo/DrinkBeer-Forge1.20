@@ -206,15 +206,15 @@ public class BeerBarrelBlockEntity extends BaseContainerBlockEntity implements I
         this.remainingBrewTime = tag.getShort("RemainingBrewTime");
         this.statusCode = tag.getShort("statusCode");
     }
-
+    // TODO: fix translatable content
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("block.drinkbeer.beer_barrel");
+        return new TranslatableContents("block.drinkbeer.beer_barrel", "", );
     }
-
+    // TODO: fix translatable content
     @Override
     protected Component getDefaultName() {
-        return new TranslatableComponent("block.drinkbeer.beer_barrel");
+        return new TranslatableContents("block.drinkbeer.beer_barrel");
     }
 
     @Nullable

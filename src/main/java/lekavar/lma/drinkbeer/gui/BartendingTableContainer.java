@@ -148,7 +148,7 @@ public class BartendingTableContainer  extends AbstractContainerMenu {
 
     @Override
     public void removed(Player player) {
-        if (!player.level.isClientSide()) {
+        if (!player.level().isClientSide()) {
             // Return Item to Player;
             for (int i = 0; i <= MixedBeerManager.MAX_SPICES_COUNT; i++) {
                 if (!bartendingSpace.getItem(i).isEmpty()) {
@@ -157,7 +157,7 @@ public class BartendingTableContainer  extends AbstractContainerMenu {
             }
         } else {
             // Play Closing Bartending Sound
-            player.level.playSound(player, player.blockPosition(), SoundEventRegistry.BARTENDING_TABLE_CLOSE.get(), SoundSource.BLOCKS, 1f, 1f);
+            player.level().playSound(player, player.blockPosition(), SoundEventRegistry.BARTENDING_TABLE_CLOSE.get(), SoundSource.BLOCKS, 1f, 1f);
         }
         super.removed(player);
     }
@@ -173,6 +173,7 @@ public class BartendingTableContainer  extends AbstractContainerMenu {
         // Only BeerCups are allowed
         @Override
         public boolean mayPlace(ItemStack p_75214_1_) {
+            //TODO: see BartendingTableBlock
             return p_75214_1_.getItem().getCreativeTabs().contains(ModCreativeTab.BEER);
         }
     }

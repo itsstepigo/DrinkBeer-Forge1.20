@@ -70,7 +70,6 @@ public class CallBellBlock extends Block {
         return InteractionResult.sidedSuccess(world.isClientSide);
     }
 
-    @Override
     public PushReaction getPistonPushReaction(BlockState p_149656_1_) {
         return PushReaction.DESTROY;
     }

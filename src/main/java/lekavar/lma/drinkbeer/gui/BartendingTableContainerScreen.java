@@ -2,6 +2,7 @@ package lekavar.lma.drinkbeer.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -23,15 +24,13 @@ public class BartendingTableContainerScreen extends AbstractContainerScreen<Bart
         this.inventory = inv;
     }
 
-    @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics stack, int mouseX, int mouseY, float partialTicks) {
         renderBackground(stack);
         super.render(stack, mouseX, mouseY, partialTicks);
         renderTooltip(stack, mouseX, mouseY);
     }
 
-    @Override
-    protected void renderBg(PoseStack stack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics stack, float partialTicks, int mouseX, int mouseY) {
         renderBackground(stack);
         RenderSystem.setShaderTexture(0, BARTENDING_TABLE_CONTAINER_RESOURCE);
         int i = (this.width - this.getXSize()) / 2;
@@ -39,8 +38,7 @@ public class BartendingTableContainerScreen extends AbstractContainerScreen<Bart
         blit(stack, i, j, 0, 0, imageWidth, imageHeight);
     }
 
-    @Override
-    protected void renderLabels(PoseStack stack, int x, int y) {
+    protected void renderLabels(GuiGraphics stack, int x, int y) {
         drawCenteredString(stack, this.font, this.title, (int) this.textureWidth / 2, (int) this.titleLabelY, 4210752);
         this.font.draw(stack, this.inventory.getDisplayName(), (float) this.inventoryLabelX, (float) this.inventoryLabelY, 4210752);
     }

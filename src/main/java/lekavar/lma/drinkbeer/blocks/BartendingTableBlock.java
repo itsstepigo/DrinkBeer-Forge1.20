@@ -14,7 +14,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraftforge.common.CreativeModeTabRegistry;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -32,6 +33,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+//TODO: material.Material repalcement
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -75,23 +77,26 @@ public class BartendingTableBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!world.isClientSide) {
             ItemStack itemStack = player.getItemInHand(hand);
-            if (itemStack.getItem().asItem().getCreativeTabs().contains(ModCreativeTab.BEER)) {
+            //TODO: @forge:Beer to fix this?
+            //basically check if blockentity = beer -> add held beer to stack
+            //CreativeModeTabRegistry.getSortedCreativeModeTabs().contains(item) returns bool?!
+            if (ModCreativeTab.BEER) {
                 world.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1f, 1f);
                 BlockEntity blockentity = world.getBlockEntity(pos);
                 if (blockentity instanceof BartendingTableBlockEntity) {
                     ((BartendingTableBlockEntity) blockentity).setBeer(itemStack);
                     itemStack.shrink(1);
-                    NetworkHooks.openGui((ServerPlayer) player, (BartendingTableBlockEntity) blockentity, (FriendlyByteBuf packerBuffer) -> {
+                    //TODO: no not to do but openGUI has been renamed to openscreen
+                    NetworkHooks.openScreen((ServerPlayer) player, (BartendingTableBlockEntity) blockentity, (FriendlyByteBuf packerBuffer) -> {
                         packerBuffer.writeBlockPos(blockentity.getBlockPos());
                     });
                 }
-                return InteractionResult.CONSUME;
             } else {
                 boolean currentOpenedState = state.getValue(OPENED);
                 world.playSound(null, pos, currentOpenedState ? SoundEventRegistry.BARTENDING_TABLE_CLOSE.get() : SoundEventRegistry.BARTENDING_TABLE_OPEN.get(), SoundSource.BLOCKS, 1f, 1f);
                 world.setBlockAndUpdate(pos, state.setValue(OPENED, !currentOpenedState));
-                return InteractionResult.CONSUME;
             }
+            return InteractionResult.CONSUME;
         }
         return InteractionResult.sidedSuccess(world.isClientSide);
     }

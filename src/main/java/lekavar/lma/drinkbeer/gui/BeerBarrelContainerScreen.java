@@ -3,6 +3,7 @@ package lekavar.lma.drinkbeer.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import lekavar.lma.drinkbeer.DrinkBeer;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -26,14 +27,14 @@ public class BeerBarrelContainerScreen extends AbstractContainerScreen<BeerBarre
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics stack, int mouseX, int mouseY, float partialTicks) {
         renderBackground(stack);
         super.render(stack, mouseX, mouseY, partialTicks);
         renderTooltip(stack, mouseX, mouseY);
     }
 
     @Override
-    protected void renderBg(PoseStack stack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics stack, float partialTicks, int mouseX, int mouseY) {
         renderBackground(stack);
         RenderSystem.setShaderTexture(0, BEER_BARREL_CONTAINER_RESOURCE);
         int i = (this.width - this.getXSize()) / 2;
@@ -41,7 +42,8 @@ public class BeerBarrelContainerScreen extends AbstractContainerScreen<BeerBarre
         blit(stack, i, j, 0, 0, imageWidth, imageHeight);
     }
 
-    @Override
+//TODO: idk perhaps changing PoseStack to GuiGraphics was mistake?
+//editor says able to delete?
     protected void renderLabels(PoseStack stack, int x, int y) {
         drawCenteredString(stack, this.font, this.title, (int) this.textureWidth / 2, (int) this.titleLabelY, 4210752);
         this.font.draw(stack, this.inventory.getDisplayName(), (float) this.inventoryLabelX, (float) this.inventoryLabelY, 4210752);

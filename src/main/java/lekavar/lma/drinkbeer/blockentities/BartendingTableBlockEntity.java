@@ -180,15 +180,15 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
     public BartendingTableBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.BARTENDING_TABLE_TILEENTITY.get(),pos,state);
     }
-
+// TODO: fix translatable content
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("block.drinkbeer.bartending_table_normal");
+        return new TranslatableContents("block.drinkbeer.bartending_table_normal");
     }
-
+// TODO: fix translatable content
     @Override
     protected Component getDefaultName() {
-        return new TranslatableComponent("block.drinkbeer.bartending_table_normal");
+        return new TranslatableContents("block.drinkbeer.bartending_table_normal");
     }
 
     @Nullable

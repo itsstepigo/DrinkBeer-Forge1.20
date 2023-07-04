@@ -1,10 +1,10 @@
 package lekavar.lma.drinkbeer.entities.damages;
 
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+// import net.minecraft.network.chat.Component;
+// import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+// import net.minecraft.world.entity.LivingEntity;
+// import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class AlcoholDamage extends DamageSource {
     public AlcoholDamage() {
