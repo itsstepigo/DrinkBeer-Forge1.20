@@ -35,11 +35,11 @@ public class BartendingTableContainerScreen extends AbstractContainerScreen<Bart
         RenderSystem.setShaderTexture(0, BARTENDING_TABLE_CONTAINER_RESOURCE);
         int i = (this.width - this.getXSize()) / 2;
         int j = (this.height - this.getYSize()) / 2;
-        blit(stack, i, j, 0, 0, imageWidth, imageHeight);
+        stack.blit(BARTENDING_TABLE_CONTAINER_RESOURCE, i, j, 0, 0, imageWidth, imageHeight);
     }
 
     protected void renderLabels(GuiGraphics stack, int x, int y) {
-        drawCenteredString(stack, this.font, this.title, (int) this.textureWidth / 2, (int) this.titleLabelY, 4210752);
-        this.font.draw(stack, this.inventory.getDisplayName(), (float) this.inventoryLabelX, (float) this.inventoryLabelY, 4210752);
+        stack.drawCenteredString(this.font, this.title,  this.textureWidth / 2, this.titleLabelY, 4210752);
+        stack.drawString(this.font, this.inventory.getDisplayName(), this.inventoryLabelX, this.inventoryLabelY, 4210752);
     }
 }

@@ -8,7 +8,6 @@ import lekavar.lma.drinkbeer.utils.mixedbeer.Spices;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -34,14 +33,14 @@ public class SpiceBlockItem extends BlockItem {
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
         if(world != null && world.isClientSide()) {
             //Spice title
-            tooltip.add(new TranslatableComponent(SpiceAndFlavorManager.getSpiceToolTipTranslationKey()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.YELLOW)));
+            tooltip.add(Component.translatable(SpiceAndFlavorManager.getSpiceToolTipTranslationKey()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.YELLOW)));
             //Flavor title
-            tooltip.add(new TranslatableComponent(SpiceAndFlavorManager.getFlavorToolTipTranslationKey()).append(":").setStyle(Style.EMPTY.applyFormat(ChatFormatting.WHITE)));
+            tooltip.add(Component.translatable(SpiceAndFlavorManager.getFlavorToolTipTranslationKey()).append(":").setStyle(Style.EMPTY.applyFormat(ChatFormatting.WHITE)));
             //Flavor and tooltip
             Flavors flavors = Spices.byItem(this.asItem()).getFlavor();
-            tooltip.add(new TranslatableComponent(SpiceAndFlavorManager.getFlavorTranslationKey(flavors.getId()))
+            tooltip.add(Component.translatable(SpiceAndFlavorManager.getFlavorTranslationKey(flavors.getId()))
                     .append("(")
-                    .append(new TranslatableComponent(SpiceAndFlavorManager.getFlavorToolTipTranslationKey(flavors.getId())))
+                    .append(Component.translatable(SpiceAndFlavorManager.getFlavorToolTipTranslationKey(flavors.getId())))
                     .append(")")
                     .setStyle(Style.EMPTY.applyFormat(ChatFormatting.RED)));
         }

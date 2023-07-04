@@ -44,11 +44,11 @@ public class BeerBarrelContainerScreen extends AbstractContainerScreen<BeerBarre
 
 //TODO: idk perhaps changing PoseStack to GuiGraphics was mistake?
 //editor says able to delete?
-    protected void renderLabels(PoseStack stack, int x, int y) {
-        drawCenteredString(stack, this.font, this.title, (int) this.textureWidth / 2, (int) this.titleLabelY, 4210752);
-        this.font.draw(stack, this.inventory.getDisplayName(), (float) this.inventoryLabelX, (float) this.inventoryLabelY, 4210752);
+    protected void renderLabels(GuiGraphics stack, int x, int y) {
+        stack.drawCenteredString(this.font, this.title, (int) this.textureWidth / 2, (int) this.titleLabelY, 4210752);
+        stack.drawString(this.font, this.inventory.getDisplayName(), this.inventoryLabelX, this.inventoryLabelY, 4210752);
         String str = menu.getIsBrewing() ? convertTickToTime(menu.getRemainingBrewingTime()) : convertTickToTime(menu.getStandardBrewingTime());
-        this.font.draw(stack, str, (float) 128, (float) 54, new Color(64, 64, 64, 255).getRGB());
+        stack.drawString(this.font, str, 128, 54, new Color(64, 64, 64, 255).getRGB());
     }
 
     public String convertTickToTime(int tick) {

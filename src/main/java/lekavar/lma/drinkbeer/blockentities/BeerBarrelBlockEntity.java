@@ -209,12 +209,12 @@ public class BeerBarrelBlockEntity extends BaseContainerBlockEntity implements I
     // TODO: fix translatable content
     @Override
     public Component getDisplayName() {
-        return new TranslatableContents("block.drinkbeer.beer_barrel", "", );
+        return Component.translatable("block.drinkbeer.beer_barrel");
     }
     // TODO: fix translatable content
     @Override
     protected Component getDefaultName() {
-        return new TranslatableContents("block.drinkbeer.beer_barrel");
+        return Component.translatable("block.drinkbeer.beer_barrel");
     }
 
     @Nullable

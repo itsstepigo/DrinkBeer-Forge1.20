@@ -136,7 +136,6 @@ public class BeerMugBlock extends Block {
         return InteractionResult.PASS;
     }
 
-    @Override
     public PushReaction getPistonPushReaction(BlockState p_149656_1_) {
         return PushReaction.DESTROY;
     }

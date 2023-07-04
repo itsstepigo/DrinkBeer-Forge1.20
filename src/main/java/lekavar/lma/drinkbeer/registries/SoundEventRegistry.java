@@ -8,6 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+
 public class SoundEventRegistry {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, DrinkBeer.MOD_ID);
     public static final RegistryObject<SoundEvent> DRINKING_BEER = register("drinking_beer");

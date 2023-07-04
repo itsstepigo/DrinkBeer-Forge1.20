@@ -157,7 +157,7 @@ public class BeerBarrelContainer extends AbstractContainerMenu {
 
     @Override
     public void removed(Player player) {
-        if (!player.level.isClientSide()) {
+        if (!player.level().isClientSide()) {
             // Return Item to Player;
             for (int i = 0; i < 5; i++) {
                 if (!brewingSpace.getItem(i).isEmpty()) {
@@ -166,7 +166,7 @@ public class BeerBarrelContainer extends AbstractContainerMenu {
             }
         } else {
             // Play Closing Barrel Sound
-            player.level.playSound(player, player.blockPosition(), SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS, 1f, 1f);
+            player.level().playSound(player, player.blockPosition(), SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS, 1f, 1f);
         }
         super.removed(player);
     }
@@ -198,11 +198,11 @@ public class BeerBarrelContainer extends AbstractContainerMenu {
         @Override
         public void onTake(Player player, ItemStack p_190901_2_) {
             if (p_190901_2_.getItem() == ItemRegistry.BEER_MUG_FROTHY_PINK_EGGNOG.get()) {
-                player.level.playSound((Player) null, beerBarrelBlockEntity.getBlockPos(), SoundEventRegistry.POURING_CHRISTMAS.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                player.level().playSound((Player) null, beerBarrelBlockEntity.getBlockPos(), SoundEventRegistry.POURING_CHRISTMAS.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 //p_190901_1_.level.playSound(p_190901_1_, p_190901_1_.blockPosition(), SoundEventRegistry.POURING_CHRISTMAS_VER.get(), SoundCategory.BLOCKS, 1f, 1f);
 
             } else {
-                player.level.playSound((Player) null, beerBarrelBlockEntity.getBlockPos(), SoundEventRegistry.POURING.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                player.level().playSound((Player) null, beerBarrelBlockEntity.getBlockPos(), SoundEventRegistry.POURING.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 //p_190901_1_.level.playSound(p_190901_1_, p_190901_1_.blockPosition(), SoundEventRegistry.POURING.get(), SoundCategory.BLOCKS, 1f, 1f);
                 //}
             }

@@ -9,7 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -100,12 +99,12 @@ public class TradeBoxBlockEntity extends BaseContainerBlockEntity {
     // TODO: fix translatable content
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("block.drinkbeer.trade_box_normal");
+        return Component.translatable("block.drinkbeer.trade_box_normal");
     }
     // TODO: fix translatable content
     @Override
     protected Component getDefaultName() {
-        return new TranslatableComponent("block.drinkbeer.trade_box_normal");
+        return Component.translatable("block.drinkbeer.trade_box_normal");
     }
 
     @Nullable

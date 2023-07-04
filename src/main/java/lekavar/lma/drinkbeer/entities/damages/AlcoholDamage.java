@@ -8,6 +8,7 @@ import net.minecraft.world.damagesource.DamageSource;
 
 public class AlcoholDamage extends DamageSource {
     public AlcoholDamage() {
+        //TODO: FIX
         super("drinkbeer.alcohol");
     }
 

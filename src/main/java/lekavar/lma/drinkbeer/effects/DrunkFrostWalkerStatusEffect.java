@@ -25,7 +25,8 @@ public class DrunkFrostWalkerStatusEffect extends MobEffect {
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player) {
-            FrostWalkerEnchantment.onEntityMoved(entity, entity.level(), new BlockPos(entity.position()), 1);
+            //TODO: veryfi tis works
+            FrostWalkerEnchantment.onEntityMoved(entity, entity.level(), new BlockPos(entity.blockPosition()), 1);
         }
     }
 

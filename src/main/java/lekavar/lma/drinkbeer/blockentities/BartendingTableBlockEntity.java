@@ -183,12 +183,14 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
 // TODO: fix translatable content
     @Override
     public Component getDisplayName() {
-        return new TranslatableContents("block.drinkbeer.bartending_table_normal");
+        return Component.translatable("block.drinkbeer.bartending_table_normal");
     }
+
 // TODO: fix translatable content
+
     @Override
     protected Component getDefaultName() {
-        return new TranslatableContents("block.drinkbeer.bartending_table_normal");
+        return Component.translatable("block.drinkbeer.bartending_table_normal");
     }
 
     @Nullable

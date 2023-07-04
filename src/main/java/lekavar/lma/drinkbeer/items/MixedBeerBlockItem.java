@@ -12,7 +12,7 @@ import lekavar.lma.drinkbeer.utils.mixedbeer.Spices;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
@@ -34,7 +34,7 @@ public class MixedBeerBlockItem extends BeerBlockItem {
 
     public void appendMixedBeerTooltip(ItemStack stack, List<Component> tooltip) {
         //Base title
-        tooltip.add(new TranslatableComponent(MixedBeerManager.getBaseBeerToolTipTranslationKey()).append(":").setStyle(Style.EMPTY.applyFormat(ChatFormatting.WHITE)));
+        tooltip.add(Component.translatable(MixedBeerManager.getBaseBeerToolTipTranslationKey()).append(":").setStyle(Style.EMPTY.applyFormat(ChatFormatting.WHITE)));
         //Base beer
         int beerId = MixedBeerManager.getBeerId(stack);
         Item beerItem = Beers.byId(beerId).getBeerItem();
@@ -43,44 +43,47 @@ public class MixedBeerBlockItem extends BeerBlockItem {
         String beerTooltip = beerId > Beers.EMPTY_BEER_ID ? "item.drinkbeer." + beerItem.toString() + ".tooltip"
                 : "";
 
-        tooltip.add(new TranslatableComponent(beerName).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
+        tooltip.add(Component.translatable(beerName).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
         //Base status effect tooltip
         if (beerId > Beers.EMPTY_BEER_ID) {
             if (Beers.byId(beerId).getHasStatusEffectTooltip()) {
-                tooltip.add(new TranslatableComponent(beerTooltip).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
+                tooltip.add(Component.translatable(beerTooltip).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
             }
         }
         //Base food level
         if (beerId > Beers.EMPTY_BEER_ID) {
             String hunger = Integer.toString(beerItem.getFoodProperties().getNutrition());
-            tooltip.add(new TranslatableComponent("drinkbeer.restores_hunger").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)).append(hunger));
+            tooltip.add(Component.translatable("drinkbeer.restores_hunger").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)).append(hunger));
         }
 
         //Flavor title
-        tooltip.add(new TranslatableComponent(SpiceAndFlavorManager.getFlavorToolTipTranslationKey()).append(":").setStyle(Style.EMPTY.applyFormat(ChatFormatting.WHITE)));
+        tooltip.add(Component.translatable(SpiceAndFlavorManager.getFlavorToolTipTranslationKey()).append(":").setStyle(Style.EMPTY.applyFormat(ChatFormatting.WHITE)));
         //Flavor
         List<Integer> spiceList = MixedBeerManager.getSpiceList(stack);
         if (!spiceList.isEmpty()) {
             for (int spiceId : spiceList) {
                 Flavors flavor = Spices.byId(spiceId).getFlavor();
-                tooltip.add(new TranslatableComponent(SpiceAndFlavorManager.getFlavorTranslationKey(flavor.getId()))
+                tooltip.add(Component.translatable(SpiceAndFlavorManager.getFlavorTranslationKey(flavor.getId()))
                         .append("(")
-                        .append(new TranslatableComponent(SpiceAndFlavorManager.getFlavorToolTipTranslationKey(flavor.getId())))
+                        .append(Component.translatable(SpiceAndFlavorManager.getFlavorToolTipTranslationKey(flavor.getId())))
                         .append(")")
                         .setStyle(Style.EMPTY.applyFormat(ChatFormatting.RED)));
             }
         } else {
-            tooltip.add(new TranslatableComponent(SpiceAndFlavorManager.getNoFlavorToolTipTranslationKey()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.RED)));
+            tooltip.add(Component.translatable(SpiceAndFlavorManager.getNoFlavorToolTipTranslationKey()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.RED)));
         }
         //Flavor combination(if exists)
         Flavors combinedFlavor = SpiceAndFlavorManager.getCombinedFlavor(spiceList);
+        /*
         if (combinedFlavor != null) {
-            tooltip.add(new TranslatableComponent("")
+            tooltip.add(Component.translatable("")
                     .append("\"")
-                    .append(new TranslatableComponent(SpiceAndFlavorManager.getFlavorTranslationKey(combinedFlavor.getId())))
+                    .append(Component.translatable(SpiceAndFlavorManager.getFlavorTranslationKey(combinedFlavor.getId())))
                     .append("\"")
                     .setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_RED)));
         }
+
+         */
     }
 
     @Override
@@ -93,7 +96,7 @@ public class MixedBeerBlockItem extends BeerBlockItem {
         int beerId = MixedBeerManager.getBeerId(stack);
         Item beerItem = Beers.byId(beerId).getBeerItem();
         String beerName = beerId > Beers.EMPTY_BEER_ID ? "block.drinkbeer." + beerItem.toString(): "block.drinkbeer.empty_beer_mug";
-        Component name = new TranslatableComponent(beerName).append(new TranslatableComponent("block.drinkbeer." + MixedBeerManager.getMixedBeerTranslationKey())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.YELLOW));
+        Component name = Component.translatable(beerName).append(Component.translatable("block.drinkbeer." + MixedBeerManager.getMixedBeerTranslationKey())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.YELLOW));
         return name;
     }
 
