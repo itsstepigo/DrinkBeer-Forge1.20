@@ -42,8 +42,6 @@ public class BeerBarrelContainerScreen extends AbstractContainerScreen<BeerBarre
         blit(stack, i, j, 0, 0, imageWidth, imageHeight);
     }
 
-//TODO: idk perhaps changing PoseStack to GuiGraphics was mistake?
-//editor says able to delete?
     protected void renderLabels(GuiGraphics stack, int x, int y) {
         stack.drawCenteredString(this.font, this.title, (int) this.textureWidth / 2, (int) this.titleLabelY, 4210752);
         stack.drawString(this.font, this.inventory.getDisplayName(), this.inventoryLabelX, this.inventoryLabelY, 4210752);

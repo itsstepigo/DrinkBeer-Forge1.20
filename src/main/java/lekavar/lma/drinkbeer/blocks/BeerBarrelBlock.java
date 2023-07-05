@@ -4,6 +4,7 @@ import lekavar.lma.drinkbeer.blockentities.BeerBarrelBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,8 +26,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-//TODO: material.Material
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -39,7 +38,7 @@ public class BeerBarrelBlock extends BaseEntityBlock {
     protected static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 15, 15);
 
     public BeerBarrelBlock() {
-        super(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0f).noOcclusion());
+        super(BlockBehaviour.Properties.of().copy(Blocks.OAK_PLANKS).strength(2.0f).noOcclusion());
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
     }
 

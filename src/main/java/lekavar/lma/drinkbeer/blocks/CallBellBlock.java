@@ -18,7 +18,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -32,7 +31,7 @@ public class CallBellBlock extends Block {
     public final static VoxelShape SHAPE = Block.box(5.5f, 0, 5.5f, 10.5f, 4, 10.5f);
 
     public CallBellBlock() {
-        super(Properties.of(Material.METAL).strength(1.0f));
+        super(Properties.of().copy(Blocks.BELL).strength(1.0f));
     }
 
     @Override

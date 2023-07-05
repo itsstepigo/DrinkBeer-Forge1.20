@@ -1,6 +1,5 @@
 package lekavar.lma.drinkbeer.blocks;
 
-import lekavar.lma.drinkbeer.DrinkBeer;
 import lekavar.lma.drinkbeer.registries.BlockRegistry;
 import lekavar.lma.drinkbeer.utils.mixedbeer.Spices;
 import net.minecraft.core.BlockPos;
@@ -9,8 +8,6 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -25,14 +22,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
-import javax.swing.text.html.BlockView;
 import java.util.Random;
 
 public class SpiceBlock extends HalfTransparentBlock {
@@ -42,7 +37,7 @@ public class SpiceBlock extends HalfTransparentBlock {
     public final static VoxelShape SPICE_DRIED_SELAGINELLA = box(5.5, 0, 5.5, 10.5, 4.5, 10.5);
 
     public SpiceBlock() {
-        super(BlockBehaviour.Properties.of(Material.WOOD).strength(1.0f));
+        super(BlockBehaviour.Properties.of().copy(Blocks.OAK_PLANKS).strength(1.0f));
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
     }
 

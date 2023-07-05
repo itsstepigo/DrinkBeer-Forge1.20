@@ -96,12 +96,12 @@ public class TradeBoxBlockEntity extends BaseContainerBlockEntity {
             return 4;
         }
     };
-    // TODO: fix translatable content
+
     @Override
     public Component getDisplayName() {
         return Component.translatable("block.drinkbeer.trade_box_normal");
     }
-    // TODO: fix translatable content
+
     @Override
     protected Component getDefaultName() {
         return Component.translatable("block.drinkbeer.trade_box_normal");

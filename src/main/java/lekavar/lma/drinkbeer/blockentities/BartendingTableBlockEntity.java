@@ -14,7 +14,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
@@ -180,13 +179,11 @@ public class BartendingTableBlockEntity extends BaseContainerBlockEntity {
     public BartendingTableBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.BARTENDING_TABLE_TILEENTITY.get(),pos,state);
     }
-// TODO: fix translatable content
+
     @Override
     public Component getDisplayName() {
         return Component.translatable("block.drinkbeer.bartending_table_normal");
     }
-
-// TODO: fix translatable content
 
     @Override
     protected Component getDefaultName() {

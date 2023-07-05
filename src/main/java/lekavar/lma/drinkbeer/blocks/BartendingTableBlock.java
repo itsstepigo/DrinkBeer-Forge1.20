@@ -14,8 +14,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraftforge.common.CreativeModeTabRegistry;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -29,12 +30,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-//TODO: material.Material repalcement
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -50,7 +45,10 @@ public class BartendingTableBlock extends BaseEntityBlock {
     public final static VoxelShape SHAPE =  Block.box(0, 0.01, 0, 16, 16, 16);
 
     public BartendingTableBlock() {
-        super(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0f).noOcclusion());
+        super(BlockBehaviour.Properties.of()
+                .copy(Blocks.OAK_PLANKS)
+                .strength(2.0f)
+                .noOcclusion());
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(OPENED, true)
