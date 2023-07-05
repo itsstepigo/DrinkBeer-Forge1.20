@@ -31,6 +31,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BartendingTableContainer  extends AbstractContainerMenu {
     private final Container bartendingSpace;
@@ -66,7 +67,7 @@ public class BartendingTableContainer  extends AbstractContainerMenu {
     }
 
     public BartendingTableContainer(int id, Inventory playerInventory, BlockPos pos) {
-        this(id, ((BartendingTableBlockEntity) Minecraft.getInstance().level.getBlockEntity(pos)), ((BartendingTableBlockEntity) Minecraft.getInstance().level.getBlockEntity(pos)).syncData, playerInventory, ((BartendingTableBlockEntity) Minecraft.getInstance().level.getBlockEntity(pos)));
+        this(id, ((BartendingTableBlockEntity) Minecraft.getInstance().level.getBlockEntity(pos)), ((BartendingTableBlockEntity) Objects.requireNonNull(Minecraft.getInstance().level.getBlockEntity(pos))).syncData, playerInventory, ((BartendingTableBlockEntity) Minecraft.getInstance().level.getBlockEntity(pos)));
     }
 
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {

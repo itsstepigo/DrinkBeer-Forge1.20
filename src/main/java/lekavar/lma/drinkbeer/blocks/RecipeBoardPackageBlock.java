@@ -34,7 +34,7 @@ public class RecipeBoardPackageBlock extends Block {
     public final static VoxelShape E_W_SHAPE = Block.box(1, 0, 0, 15, 10, 16);
 
     public RecipeBoardPackageBlock() {
-        super(Properties.of().copy(Blocks.BELL).strength(1.0f).noOcclusion());
+        super(Properties.copy(Blocks.BELL).strength(1.0f).noOcclusion());
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
     }
 

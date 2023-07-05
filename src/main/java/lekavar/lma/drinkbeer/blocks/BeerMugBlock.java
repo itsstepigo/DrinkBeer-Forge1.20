@@ -40,7 +40,7 @@ public class BeerMugBlock extends Block {
     };
 
     public BeerMugBlock() {
-        super(Properties.of().copy(Blocks.OAK_PLANKS).strength(1.0f).noOcclusion());
+        super(Properties.copy(Blocks.OAK_PLANKS).strength(1.0f).noOcclusion());
         this.registerDefaultState(
                 this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1)
         );

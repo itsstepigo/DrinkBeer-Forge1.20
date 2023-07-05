@@ -39,7 +39,7 @@ public class BeerBarrelContainerScreen extends AbstractContainerScreen<BeerBarre
         RenderSystem.setShaderTexture(0, BEER_BARREL_CONTAINER_RESOURCE);
         int i = (this.width - this.getXSize()) / 2;
         int j = (this.height - this.getYSize()) / 2;
-        blit(stack, i, j, 0, 0, imageWidth, imageHeight);
+        stack.blit(BEER_BARREL_CONTAINER_RESOURCE, i, j, 0, 0, imageWidth, imageHeight);
     }
 
     protected void renderLabels(GuiGraphics stack, int x, int y) {

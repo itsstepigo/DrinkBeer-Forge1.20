@@ -38,7 +38,7 @@ public class BeerBarrelBlock extends BaseEntityBlock {
     protected static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 15, 15);
 
     public BeerBarrelBlock() {
-        super(BlockBehaviour.Properties.of().copy(Blocks.OAK_PLANKS).strength(2.0f).noOcclusion());
+        super(Properties.copy(Blocks.OAK_PLANKS).strength(2.0f).noOcclusion());
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
     }
 

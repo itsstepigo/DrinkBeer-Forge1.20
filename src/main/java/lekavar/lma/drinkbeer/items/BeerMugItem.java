@@ -8,7 +8,6 @@ import lekavar.lma.drinkbeer.utils.ModCreativeTab;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
@@ -40,6 +39,7 @@ public class BeerMugItem extends BeerBlockItem {
     private final boolean hasExtraTooltip;
 
     public BeerMugItem(Block block, int nutrition, boolean hasExtraTooltip) {
+        //TODO: Creative Tab entry has been moved to the tab reg?!
         super(block,new Item.Properties().tab(ModCreativeTab.BEER).stacksTo(16)
                 .food(new FoodProperties.Builder().nutrition(nutrition).alwaysEat().build()));
         this.hasExtraTooltip = hasExtraTooltip;
@@ -54,7 +54,7 @@ public class BeerMugItem extends BeerBlockItem {
     }
 
     public BeerMugItem(Block block, Supplier<MobEffectInstance> statusEffectInstance, int nutrition, boolean hasExtraTooltip) {
-        super(block,new Item.Properties().tab(ModCreativeTab.BEER).stacksTo(16)
+        super(block,new Properties().(ModCreativeTab.BEER).stacksTo(16)
                 .food(statusEffectInstance != null
                         ? new FoodProperties.Builder().nutrition(nutrition).effect(statusEffectInstance, 1).alwaysEat().build()
                         : new FoodProperties.Builder().nutrition(nutrition).alwaysEat().build()));
@@ -74,10 +74,10 @@ public class BeerMugItem extends BeerBlockItem {
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
         String name = this.asItem().toString();
         if (hasEffectNoticeTooltip() && world != null && world.isClientSide()) {
-            tooltip.add(new TranslatableComponent("item.drinkbeer." + name + ".tooltip").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
+            tooltip.add(Component.translatable("item.drinkbeer." + name + ".tooltip").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
         }
         String hunger = String.valueOf(stack.getItem().getFoodProperties().getNutrition());
-        tooltip.add(new TranslatableComponent("drinkbeer.restores_hunger").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)).append(hunger));
+        tooltip.add(Component.translatable("drinkbeer.restores_hunger").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)).append(hunger));
     }
 
     private boolean hasEffectNoticeTooltip() {

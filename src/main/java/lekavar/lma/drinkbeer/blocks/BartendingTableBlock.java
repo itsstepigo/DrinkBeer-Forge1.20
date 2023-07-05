@@ -14,6 +14,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraftforge.common.CreativeModeTabRegistry;
@@ -45,7 +46,7 @@ public class BartendingTableBlock extends BaseEntityBlock {
     public final static VoxelShape SHAPE =  Block.box(0, 0.01, 0, 16, 16, 16);
 
     public BartendingTableBlock() {
-        super(BlockBehaviour.Properties.of()
+        super(Properties
                 .copy(Blocks.OAK_PLANKS)
                 .strength(2.0f)
                 .noOcclusion());
@@ -75,6 +76,7 @@ public class BartendingTableBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!world.isClientSide) {
             ItemStack itemStack = player.getItemInHand(hand);
+            Item stackItem = itemStack.getItem();
             //TODO: @forge:Beer to fix this?
             //basically check if blockentity = beer -> add held beer to stack
             //CreativeModeTabRegistry.getSortedCreativeModeTabs().contains(item) returns bool?!

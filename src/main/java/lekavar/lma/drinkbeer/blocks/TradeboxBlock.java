@@ -38,7 +38,7 @@ public class TradeboxBlock extends BaseEntityBlock {
     public final static VoxelShape SHAPE = Block.box(0, 0.01, 0, 16, 16, 16);
 
     public TradeboxBlock() {
-        super(Properties.of().copy(Blocks.OAK_PLANKS).strength(2.0f).noOcclusion());
+        super(Properties.copy(Blocks.OAK_PLANKS).strength(2.0f).noOcclusion());
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(FACING, Direction.NORTH));
     }

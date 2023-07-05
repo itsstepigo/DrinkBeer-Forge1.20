@@ -33,7 +33,7 @@ public class MixedBeerBlock extends BaseEntityBlock {
     public final static VoxelShape ONE_MUG_SHAPE = Block.box(4, 0, 4, 12, 6, 12);
 
     public MixedBeerBlock() {
-        super(Properties.of().copy(Blocks.OAK_PLANKS).strength(1.0f).noOcclusion());
+        super(Properties.copy(Blocks.OAK_PLANKS).strength(1.0f).noOcclusion());
     }
 
     @Override

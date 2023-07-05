@@ -1,6 +1,5 @@
 package lekavar.lma.drinkbeer.items;
 
-import com.mojang.math.Vector3d;
 import lekavar.lma.drinkbeer.DrinkBeer;
 import lekavar.lma.drinkbeer.registries.ItemRegistry;
 import lekavar.lma.drinkbeer.registries.SoundEventRegistry;
@@ -13,6 +12,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import org.joml.Vector3d;
 
 import static java.lang.Math.pow;
 import static net.minecraft.util.Mth.sqrt;

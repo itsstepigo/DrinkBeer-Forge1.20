@@ -26,7 +26,7 @@ public class RecipeBoardBlock extends Block {
     public final static VoxelShape WEST_SHAPE = Block.box(0, 0, 1, 1.5, 16, 15);
 
     public RecipeBoardBlock(boolean acquirableViaPackage) {
-        super(Properties.of().copy(Blocks.OAK_PLANKS).strength(1.0f).noOcclusion());
+        super(Properties.copy(Blocks.OAK_PLANKS).strength(1.0f).noOcclusion());
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
         this.acquirableViaPackage = acquirableViaPackage;
     }
