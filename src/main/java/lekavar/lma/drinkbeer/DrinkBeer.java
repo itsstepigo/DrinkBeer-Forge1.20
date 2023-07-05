@@ -28,6 +28,7 @@ public class DrinkBeer {
         RecipeRegistry.RECIPE_TYPES.register(bus);
         RecipeRegistry.RECIPE_SERIALIZERS.register(bus);
         ParticleRegistry.PARTICLES.register(bus);
+        CreativeModeTabsRegistry.TABS.register(bus);
 
         bus.addListener(DrinkBeerClient::onInitializeClient);
         bus.addListener(NetWorking::init);

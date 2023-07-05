@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 
 public class BeerMugItem extends BeerBlockItem {
     private final static double MAX_PLACE_DISTANCE = 2.0D;
-    private final boolean hasExtraTooltip;
+    private boolean hasExtraTooltip;
 
     public BeerMugItem(Block block, int nutrition, boolean hasExtraTooltip) {
         //TODO: Creative Tab entry has been moved to the tab reg?!
@@ -54,7 +54,7 @@ public class BeerMugItem extends BeerBlockItem {
     }
 
     public BeerMugItem(Block block, Supplier<MobEffectInstance> statusEffectInstance, int nutrition, boolean hasExtraTooltip) {
-        super(block,new Properties().(ModCreativeTab.BEER).stacksTo(16)
+        super(block,new Properties(). (ModCreativeTab.BEER).stacksTo(16)
                 .food(statusEffectInstance != null
                         ? new FoodProperties.Builder().nutrition(nutrition).effect(statusEffectInstance, 1).alwaysEat().build()
                         : new FoodProperties.Builder().nutrition(nutrition).alwaysEat().build()));

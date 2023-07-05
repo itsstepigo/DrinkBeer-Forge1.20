@@ -1,3 +1,4 @@
+/*
 package lekavar.lma.drinkbeer.utils;
 
 import lekavar.lma.drinkbeer.blocks.*;
@@ -62,3 +63,4 @@ public class ModCreativeTab {
         }
     }
 }
+*/
