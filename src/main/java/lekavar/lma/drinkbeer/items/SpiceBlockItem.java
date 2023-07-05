@@ -1,8 +1,6 @@
 package lekavar.lma.drinkbeer.items;
 
-import lekavar.lma.drinkbeer.DrinkBeer;
 import lekavar.lma.drinkbeer.managers.SpiceAndFlavorManager;
-import lekavar.lma.drinkbeer.utils.ModCreativeTab;
 import lekavar.lma.drinkbeer.utils.mixedbeer.Flavors;
 import lekavar.lma.drinkbeer.utils.mixedbeer.Spices;
 import net.minecraft.ChatFormatting;
@@ -22,7 +20,7 @@ import java.util.List;
 
 public class SpiceBlockItem extends BlockItem {
     public SpiceBlockItem(Block block, @Nullable MobEffectInstance statusEffectInstance, int hunger) {
-        super(block, new Item.Properties().tab(ModCreativeTab.GENERAL).stacksTo(64)
+        super(block, new Item.Properties().stacksTo(64)
                 .food(statusEffectInstance != null
                         ? new FoodProperties.Builder().nutrition(hunger).effect(statusEffectInstance, 1).alwaysEat().build()
                         : new FoodProperties.Builder().nutrition(hunger).alwaysEat().build())

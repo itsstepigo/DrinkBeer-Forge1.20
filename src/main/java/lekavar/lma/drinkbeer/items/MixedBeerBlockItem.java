@@ -5,7 +5,6 @@ import lekavar.lma.drinkbeer.blocks.MixedBeerBlock;
 import lekavar.lma.drinkbeer.managers.MixedBeerManager;
 import lekavar.lma.drinkbeer.managers.SpiceAndFlavorManager;
 import lekavar.lma.drinkbeer.registries.BlockRegistry;
-import lekavar.lma.drinkbeer.utils.ModCreativeTab;
 import lekavar.lma.drinkbeer.utils.beer.Beers;
 import lekavar.lma.drinkbeer.utils.mixedbeer.Flavors;
 import lekavar.lma.drinkbeer.utils.mixedbeer.Spices;
@@ -28,7 +27,7 @@ import java.util.List;
 
 public class MixedBeerBlockItem extends BeerBlockItem {
     public MixedBeerBlockItem(Block block) {
-        super(block, new Item.Properties().tab(ModCreativeTab.BEER).stacksTo(1)
+        super(block, new Item.Properties().stacksTo(1)
                 .food(new FoodProperties.Builder().alwaysEat().build()));
     }
 

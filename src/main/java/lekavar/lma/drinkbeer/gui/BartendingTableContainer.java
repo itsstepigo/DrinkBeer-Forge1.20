@@ -6,9 +6,9 @@ import lekavar.lma.drinkbeer.items.MixedBeerBlockItem;
 import lekavar.lma.drinkbeer.items.SpiceBlockItem;
 import lekavar.lma.drinkbeer.managers.MixedBeerManager;
 import lekavar.lma.drinkbeer.registries.ContainerTypeRegistry;
+import lekavar.lma.drinkbeer.registries.CreativeModeTabsRegistry;
 import lekavar.lma.drinkbeer.registries.ItemRegistry;
 import lekavar.lma.drinkbeer.registries.SoundEventRegistry;
-import lekavar.lma.drinkbeer.utils.ModCreativeTab;
 import lekavar.lma.drinkbeer.utils.beer.Beers;
 import lekavar.lma.drinkbeer.utils.mixedbeer.Spices;
 import net.minecraft.client.Minecraft;
@@ -24,6 +24,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.CreativeModeTabRegistry;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.SlotItemHandler;
@@ -173,9 +174,8 @@ public class BartendingTableContainer  extends AbstractContainerMenu {
 
         // Only BeerCups are allowed
         @Override
-        public boolean mayPlace(ItemStack p_75214_1_) {
-            //TODO: see BartendingTableBlock
-            return p_75214_1_.getItem().getCreativeTabs().contains(ModCreativeTab.BEER);
+        public boolean mayPlace(ItemStack itemStack) {
+            return CreativeModeTabRegistry.getTab(CreativeModeTabsRegistry.BEER.getId()).contains(itemStack);
         }
     }
 

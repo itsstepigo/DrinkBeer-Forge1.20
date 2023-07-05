@@ -2,9 +2,9 @@ package lekavar.lma.drinkbeer.blocks;
 
 import lekavar.lma.drinkbeer.blockentities.BartendingTableBlockEntity;
 import lekavar.lma.drinkbeer.blockentities.BeerBarrelBlockEntity;
+import lekavar.lma.drinkbeer.registries.CreativeModeTabsRegistry;
 import lekavar.lma.drinkbeer.registries.ItemRegistry;
 import lekavar.lma.drinkbeer.registries.SoundEventRegistry;
-import lekavar.lma.drinkbeer.utils.ModCreativeTab;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
@@ -14,6 +14,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.*;
@@ -77,16 +79,15 @@ public class BartendingTableBlock extends BaseEntityBlock {
         if (!world.isClientSide) {
             ItemStack itemStack = player.getItemInHand(hand);
             Item stackItem = itemStack.getItem();
-            //TODO: @forge:Beer to fix this?
             //basically check if blockentity = beer -> add held beer to stack
             //CreativeModeTabRegistry.getSortedCreativeModeTabs().contains(item) returns bool?!
-            if (ModCreativeTab.BEER) {
+            if (CreativeModeTabRegistry.getTab(CreativeModeTabsRegistry.BEER.getId()).contains(itemStack)) {
                 world.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1f, 1f);
                 BlockEntity blockentity = world.getBlockEntity(pos);
                 if (blockentity instanceof BartendingTableBlockEntity) {
                     ((BartendingTableBlockEntity) blockentity).setBeer(itemStack);
                     itemStack.shrink(1);
-                    //TODO: no not to do but openGUI has been renamed to openscreen
+                    //openGUI has been renamed to openscreen
                     NetworkHooks.openScreen((ServerPlayer) player, (BartendingTableBlockEntity) blockentity, (FriendlyByteBuf packerBuffer) -> {
                         packerBuffer.writeBlockPos(blockentity.getBlockPos());
                     });
