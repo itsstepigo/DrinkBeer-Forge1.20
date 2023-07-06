@@ -1,6 +1,7 @@
 {
-  "itemGroup.drinkbeer.beer": "Beer",
-  "itemGroup.drinkbeer.general": "DrinkBeer General Blocks",
+  "itemGroup.drinkbeer.beer": "Beers",
+  "itemGroup.drinkbeer.general": "General Blocks",
+  "itemGroup.drinkbeer.spices": "Beeer Spices",
 
   "block.drinkbeer.beer_mug": "Miner Pale Ale",
   "block.drinkbeer.beer_mug_blaze_stout": "Blaze Stout",

@@ -1,6 +1,7 @@
 {
   "itemGroup.drinkbeer.beer": "Bier",
   "itemGroup.drinkbeer.general": "DrinkBeer Allgemeine Blöcke",
+  "itemGroup.drinkbeer.spices": "Geschmackliche Additive",
 
   "block.drinkbeer.beer_mug": "Miner Pale Ale",
   "block.drinkbeer.beer_mug_blaze_stout": "Lohen-Schrei",

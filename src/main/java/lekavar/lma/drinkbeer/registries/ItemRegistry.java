@@ -13,8 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import static lekavar.lma.drinkbeer.registries.CreativeModeTabsRegistry.addToTabBEER;
-import static lekavar.lma.drinkbeer.registries.CreativeModeTabsRegistry.addToTabGENERAL;
+import static lekavar.lma.drinkbeer.registries.CreativeModeTabsRegistry.*;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ItemRegistry {
@@ -55,19 +54,19 @@ public class ItemRegistry {
     public static final RegistryObject<Item> MIXED_BEER = addToTabBEER(ITEMS.register("mixed_beer", () -> new MixedBeerBlockItem(BlockRegistry.MIXED_BEER.get())));
 
     // Spices
-    public static final RegistryObject<Item> SPICE_BLAZE_PAPRIKA = ITEMS.register("spice_blaze_paprika", () -> new SpiceBlockItem(BlockRegistry.SPICE_BLAZE_PAPRIKA.get(), null, 1));
-    public static final RegistryObject<Item> SPICE_DRIED_EGLIA_BUD  = ITEMS.register("spice_dried_eglia_bud", () -> new SpiceBlockItem(BlockRegistry.SPICE_DRIED_EGLIA_BUD.get(), null, 1));
-    public static final RegistryObject<Item> SPICE_SMOKED_EGLIA_BUD  = ITEMS.register("spice_smoked_eglia_bud",() -> new SpiceBlockItem(BlockRegistry.SPICE_SMOKED_EGLIA_BUD.get(), null, 1));
-    public static final RegistryObject<Item> SPICE_AMETHYST_NIGELLA_SEEDS  = ITEMS.register("spice_amethyst_nigella_seeds", () -> new SpiceBlockItem(BlockRegistry.SPICE_AMETHYST_NIGELLA_SEEDS.get(), null, 1));
-    public static final RegistryObject<Item> SPICE_CITRINE_NIGELLA_SEEDS  = ITEMS.register("spice_citrine_nigella_seeds", () -> new SpiceBlockItem(BlockRegistry.SPICE_CITRINE_NIGELLA_SEEDS.get(), null, 1));
-    public static final RegistryObject<Item> SPICE_ICE_MINT  = ITEMS.register("spice_ice_mint", () -> new SpiceBlockItem(BlockRegistry.SPICE_ICE_MINT.get(), null, 1));
-    public static final RegistryObject<Item> SPICE_ICE_PATCHOULI  = ITEMS.register("spice_ice_patchouli", () -> new SpiceBlockItem(BlockRegistry.SPICE_ICE_PATCHOULI.get(), null, 1));
-    public static final RegistryObject<Item> SPICE_STORM_SHARDS  = ITEMS.register("spice_storm_shards", () -> new SpiceBlockItem(BlockRegistry.SPICE_STORM_SHARDS.get(), null, 1));
-    public static final RegistryObject<Item> SPICE_ROASTED_RED_PINE_NUTS  = ITEMS.register("spice_roasted_red_pine_nuts", () -> new SpiceBlockItem(BlockRegistry.SPICE_ROASTED_RED_PINE_NUTS.get(), null, 2));
-    public static final RegistryObject<Item> SPICE_GLACE_GOJI_BERRIES  = ITEMS.register("spice_glace_goji_berries", () -> new SpiceBlockItem(BlockRegistry.SPICE_GLACE_GOJI_BERRIES.get(), null, 1));
-    public static final RegistryObject<Item> SPICE_FROZEN_PERSIMMON  = ITEMS.register("spice_frozen_persimmon", () -> new SpiceBlockItem(BlockRegistry.SPICE_FROZEN_PERSIMMON.get(), null, 1));
-    public static final RegistryObject<Item> SPICE_ROASTED_PECANS  = ITEMS.register("spice_roasted_pecans", () -> new SpiceBlockItem(BlockRegistry.SPICE_ROASTED_PECANS.get(), null, 2));
-    public static final RegistryObject<Item> SPICE_SILVER_NEEDLE_WHITE_TEA  = ITEMS.register("spice_silver_needle_white_tea", () -> new SpiceBlockItem(BlockRegistry.SPICE_SILVER_NEEDLE_WHITE_TEA.get(), null, 2));
-    public static final RegistryObject<Item> SPICE_GOLDEN_CINNAMON_POWDER  = ITEMS.register("spice_golden_cinnamon_powder", () -> new SpiceBlockItem(BlockRegistry.SPICE_GOLDEN_CINNAMON_POWDER.get(), null, 2));
-    public static final RegistryObject<Item> SPICE_DRIED_SELAGINELLA   = ITEMS.register("spice_dried_selaginella", () -> new SpiceBlockItem(BlockRegistry.SPICE_DRIED_SELAGINELLA.get(), null, 2));
+    public static final RegistryObject<Item> SPICE_BLAZE_PAPRIKA = addToTabSPICES(ITEMS.register("spice_blaze_paprika", () -> new SpiceBlockItem(BlockRegistry.SPICE_BLAZE_PAPRIKA.get(), null, 1)));
+    public static final RegistryObject<Item> SPICE_DRIED_EGLIA_BUD  = addToTabSPICES(ITEMS.register("spice_dried_eglia_bud", () -> new SpiceBlockItem(BlockRegistry.SPICE_DRIED_EGLIA_BUD.get(), null, 1)));
+    public static final RegistryObject<Item> SPICE_SMOKED_EGLIA_BUD  = addToTabSPICES(ITEMS.register("spice_smoked_eglia_bud",() -> new SpiceBlockItem(BlockRegistry.SPICE_SMOKED_EGLIA_BUD.get(), null, 1)));
+    public static final RegistryObject<Item> SPICE_AMETHYST_NIGELLA_SEEDS  = addToTabSPICES(ITEMS.register("spice_amethyst_nigella_seeds", () -> new SpiceBlockItem(BlockRegistry.SPICE_AMETHYST_NIGELLA_SEEDS.get(), null, 1)));
+    public static final RegistryObject<Item> SPICE_CITRINE_NIGELLA_SEEDS  = addToTabSPICES(ITEMS.register("spice_citrine_nigella_seeds", () -> new SpiceBlockItem(BlockRegistry.SPICE_CITRINE_NIGELLA_SEEDS.get(), null, 1)));
+    public static final RegistryObject<Item> SPICE_ICE_MINT  = addToTabSPICES(ITEMS.register("spice_ice_mint", () -> new SpiceBlockItem(BlockRegistry.SPICE_ICE_MINT.get(), null, 1)));
+    public static final RegistryObject<Item> SPICE_ICE_PATCHOULI  = addToTabSPICES(ITEMS.register("spice_ice_patchouli", () -> new SpiceBlockItem(BlockRegistry.SPICE_ICE_PATCHOULI.get(), null, 1)));
+    public static final RegistryObject<Item> SPICE_STORM_SHARDS  = addToTabSPICES(ITEMS.register("spice_storm_shards", () -> new SpiceBlockItem(BlockRegistry.SPICE_STORM_SHARDS.get(), null, 1)));
+    public static final RegistryObject<Item> SPICE_ROASTED_RED_PINE_NUTS  = addToTabSPICES(ITEMS.register("spice_roasted_red_pine_nuts", () -> new SpiceBlockItem(BlockRegistry.SPICE_ROASTED_RED_PINE_NUTS.get(), null, 2)));
+    public static final RegistryObject<Item> SPICE_GLACE_GOJI_BERRIES  = addToTabSPICES(ITEMS.register("spice_glace_goji_berries", () -> new SpiceBlockItem(BlockRegistry.SPICE_GLACE_GOJI_BERRIES.get(), null, 1)));
+    public static final RegistryObject<Item> SPICE_FROZEN_PERSIMMON  = addToTabSPICES(ITEMS.register("spice_frozen_persimmon", () -> new SpiceBlockItem(BlockRegistry.SPICE_FROZEN_PERSIMMON.get(), null, 1)));
+    public static final RegistryObject<Item> SPICE_ROASTED_PECANS  = addToTabSPICES(ITEMS.register("spice_roasted_pecans", () -> new SpiceBlockItem(BlockRegistry.SPICE_ROASTED_PECANS.get(), null, 2)));
+    public static final RegistryObject<Item> SPICE_SILVER_NEEDLE_WHITE_TEA  = addToTabSPICES(ITEMS.register("spice_silver_needle_white_tea", () -> new SpiceBlockItem(BlockRegistry.SPICE_SILVER_NEEDLE_WHITE_TEA.get(), null, 2)));
+    public static final RegistryObject<Item> SPICE_GOLDEN_CINNAMON_POWDER  = addToTabSPICES(ITEMS.register("spice_golden_cinnamon_powder", () -> new SpiceBlockItem(BlockRegistry.SPICE_GOLDEN_CINNAMON_POWDER.get(), null, 2)));
+    public static final RegistryObject<Item> SPICE_DRIED_SELAGINELLA   = addToTabSPICES(ITEMS.register("spice_dried_selaginella", () -> new SpiceBlockItem(BlockRegistry.SPICE_DRIED_SELAGINELLA.get(), null, 2)));
 }
