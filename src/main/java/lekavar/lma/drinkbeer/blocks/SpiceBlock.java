@@ -37,7 +37,7 @@ public class SpiceBlock extends HalfTransparentBlock {
     public final static VoxelShape SPICE_DRIED_SELAGINELLA = box(5.5, 0, 5.5, 10.5, 4.5, 10.5);
 
     public SpiceBlock() {
-        super(Properties.copy(Blocks.OAK_PLANKS).strength(1.0f));
+        super(Properties.copy(Blocks.OAK_PLANKS).strength(1.0f).pushReaction(PushReaction.DESTROY));
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
     }
 

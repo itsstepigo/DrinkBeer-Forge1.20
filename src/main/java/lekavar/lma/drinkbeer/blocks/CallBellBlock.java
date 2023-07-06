@@ -31,7 +31,7 @@ public class CallBellBlock extends Block {
     public final static VoxelShape SHAPE = Block.box(5.5f, 0, 5.5f, 10.5f, 4, 10.5f);
 
     public CallBellBlock() {
-        super(Properties.copy(Blocks.BELL).strength(1.0f));
+        super(Properties.copy(Blocks.BELL).strength(1.0f).pushReaction(PushReaction.DESTROY));
     }
 
     @Override

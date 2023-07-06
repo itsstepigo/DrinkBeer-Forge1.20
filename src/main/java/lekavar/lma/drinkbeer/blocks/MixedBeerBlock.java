@@ -29,11 +29,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+//TODO get working
 public class MixedBeerBlock extends BaseEntityBlock {
     public final static VoxelShape ONE_MUG_SHAPE = Block.box(4, 0, 4, 12, 6, 12);
 
     public MixedBeerBlock() {
-        super(Properties.copy(Blocks.OAK_PLANKS).strength(1.0f).noOcclusion());
+        super(Properties.copy(Blocks.OAK_PLANKS).strength(1.0f).noOcclusion().pushReaction(PushReaction.DESTROY));
     }
 
     @Override
