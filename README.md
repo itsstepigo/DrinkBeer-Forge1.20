@@ -3,7 +3,7 @@
 
 ## I am not the original author of this mod, nor do I manage the curseforge page for it. This means that no change made on this repo will matter for the downloadable version of the mod on curseforge.
 ### Hello  from me as well.
-I am not even the author of the 1.18 repo as you may see. The thing is still in development and not compilable as of yet. Once I get this thing working I'll contact the original author on how to publish this version, until then patients.
+I am not even the author of the 1.18 repo as you may see. The thing is still in development it is compilable now at least but not fully fully tested. Once I get this thing working I'll contact the original author on how to publish this version, until then patients.
 And thanks to <a href="https://www.youtube.com/@TurtyWurty">Turty Wurty </a> for the 1.20 dev tutorial as well as to Commoble from discord for answering my stupid questions.
 
 -bld
