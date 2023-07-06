@@ -1,8 +1,6 @@
 package lekavar.lma.drinkbeer.client.renderers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-//TODO: Fix this thing "Vector3f"
-import com.mojang.math.Vector3f;
 import lekavar.lma.drinkbeer.blockentities.MixedBeerBlockEntity;
 import lekavar.lma.drinkbeer.registries.ItemRegistry;
 import lekavar.lma.drinkbeer.utils.beer.Beers;
@@ -14,7 +12,10 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class MixedBeerEntityRenderer implements BlockEntityRenderer<MixedBeerBlockEntity> {
     public MixedBeerEntityRenderer(BlockEntityRendererProvider.Context context) {
@@ -28,15 +29,18 @@ public class MixedBeerEntityRenderer implements BlockEntityRenderer<MixedBeerBlo
         int beerId = blockEntity.getBeerId();
         ItemStack beerStack = getBeerStack(beerId);
         BlockPos pos = blockEntity.getBlockPos();
-
+        float angle = getRandomAngleByPos(pos);
         //Move beer
         matrices.translate(0.5, 0.25, 0.5);
         //Rotate beer
-        matrices.mulPose(Vector3f.YP.rotationDegrees(getRandomAngleByPos(pos)));
+        //Vector3f.YP.rotationDegrees(getRandomAngleByPos(pos))
+        //TODO: Veryfy this shit works
+        matrices.mulPose(new Quaternionf(0, 1, 0, angle));
         //Get light at the beer block
         int lightAbove = LevelRenderer.getLightColor(blockEntity.getLevel(), blockEntity.getBlockPos().above());
         //Render beer
-        Minecraft.getInstance().getItemRenderer().renderStatic(beerStack, ItemTransforms.TransformType.GROUND ,lightAbove, overlay,matrices,vertexConsumers,0);
+        //TODO: how to fix renderStatic
+        Minecraft.getInstance().getItemRenderer().renderStatic(beerStack, ItemDisplayContext.GROUND, lightAbove, overlay, matrices, vertexConsumers, null, 0);
 
         matrices.popPose();
     }

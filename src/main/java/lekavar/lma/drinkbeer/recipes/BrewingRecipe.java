@@ -16,7 +16,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraftforge.registries.RegistryBuilder;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -141,7 +141,7 @@ public class BrewingRecipe implements Recipe<IBrewingInventory> {
         return brewingTime;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<BrewingRecipe> {
+    public static class Serializer extends RegistryBuilder<RecipeSerializer<?>> implements RecipeSerializer<BrewingRecipe> {
 
         @Override
         public BrewingRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {

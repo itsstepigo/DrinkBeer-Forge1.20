@@ -27,6 +27,6 @@ public class SoundEventRegistry {
 
 
     private static RegistryObject<SoundEvent> register(String name) {
-        return SOUNDS.register(name, () -> new SoundEvent(new ResourceLocation("drinkbeer", name)));
+        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation("drinkbeer", name)));
     }
 }

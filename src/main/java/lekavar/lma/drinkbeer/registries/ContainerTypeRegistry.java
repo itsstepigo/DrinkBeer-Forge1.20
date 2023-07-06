@@ -16,7 +16,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 // Automatically Registering Static Event Handlers, see https://mcforge.readthedocs.io/en/1.16.x/events/intro/#automatically-registering-static-event-handlers
 @Mod.EventBusSubscriber(modid = DrinkBeer.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ContainerTypeRegistry {
-    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, DrinkBeer.MOD_ID);
+    //ForgeRegistries.CONTAINERS
+    //CONTAINERS -> MENU
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, DrinkBeer.MOD_ID);
     public static final RegistryObject<MenuType<BeerBarrelContainer>> beerBarrelContainer = CONTAINERS.register("beer_barrel_container", () -> IForgeMenuType .create(BeerBarrelContainer::new));
     public static final RegistryObject<MenuType<BartendingTableContainer>> bartendingTableContainer = CONTAINERS.register("bartending_table_normal_container", () -> IForgeMenuType .create(BartendingTableContainer::new));
     public static final RegistryObject<MenuType<TradeBoxContainer>> tradeBoxContainer = CONTAINERS.register("trade_box_normal_container", () -> IForgeMenuType .create(TradeBoxContainer::new));
